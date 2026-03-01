@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow: hidden;
+  height: 100%;
+}
+
+/* Dark theme (default) – darker background */
+html.dark {
+  --theme-text: #f1f5f9;
+  --theme-muted: #94a3b8;
+  --theme-strong: #030306;
+  --theme-bg: #030306;
+  --theme-bg-canvas: #030306;
+  --theme-on-accent: #030306;
+}
+
+body {
+  font-family: 'Outfit', system-ui, sans-serif;
+  background: var(--theme-bg, #030306);
+  color: var(--theme-text, #f1f5f9);
+  overflow: hidden;
+  height: 100%;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Light theme – lighter UI */
+html.light {
+  --theme-text: #0f172a;
+  --theme-muted: #64748b;
+  --theme-strong: #f8fafc;
+  --theme-bg: #f1f5f9;
+  --theme-bg-canvas: #b8d4e8;
+  --theme-on-accent: #1e1b4b;
+}
+
+html.light body {
+  background: var(--theme-bg);
+  color: var(--theme-text);
+}
+
+#root {
+  height: 100%;
+  min-height: 100vh;
+}
+
+/* Canvas wrapper – matches theme */
+.canvas-bg {
+  background: var(--theme-bg-canvas, #030306);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--theme-strong);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #7c3aed;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a78bfa;
+}
+
+/* Selection */
+::selection {
+  background: rgba(167, 139, 250, 0.3);
+  color: var(--theme-text);
+}
+
+/* Swiper – theme pagination bullets */
+.swiper-pagination-bullet {
+  background: var(--theme-muted);
+  opacity: 0.6;
+  width: 8px;
+  height: 8px;
+}
+.swiper-pagination-bullet-active {
+  background: #a78bfa;
+  opacity: 1;
+  transform: scale(1.2);
+}

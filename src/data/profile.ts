@@ -1,0 +1,101 @@
+import type { Profile } from '../types/profile'
+
+export const profile: Profile = {
+  name: 'Sonu Daryani',
+  title: 'Full Stack Developer | Senior Front-end Engineer',
+  tagline: 'Building scalable, AI-enabled web platforms with strong UI/UX precision',
+  image: '/profile.jpeg',
+  email: 'sonudaryani135@gmail.com',
+  phone: '+91 8178323382',
+  location: 'Orai, Uttar Pradesh, 285001',
+  about: `Senior Front-end & Full Stack Engineer with nearly 4 years of experience specializing in Next.js, TypeScript, and NestJS API integrations across AI-powered and data-intensive platforms. Currently serving as Frontend Lead at IntalentAI, managing junior engineers while owning end-to-end UI architecture, delivery timelines, and cross-team collaboration. Proven expertise in building multi-tenant, scalable SaaS applications with complex data flows including scheduling systems, dynamic pricing engines, search filtering, and validation pipelines.`,
+  links: {
+    linkedin: 'https://www.linkedin.com/in/sonu-daryani-248a18202/',
+    github: 'https://github.com/sonu7524',
+    intalent: 'https://intalent.ai/',
+    unlocklife: 'https://www.unlocklife.today/',
+    winity: 'https://winity.life',
+  },
+  skills: {
+    languages: ['JavaScript', 'TypeScript', 'SQL'],
+    frameworks: ['Next.js', 'React', 'NestJS', 'Redux', 'GraphQL', 'Angular', 'React Native'],
+    backend: ['PostgreSQL', 'Prisma ORM', 'MongoDB', 'Supabase'],
+    cloud: ['Azure (AKS, Functions, Storage)', 'AWS', 'Firebase'],
+    tools: ['Git', 'VS Code', 'Postman', 'Cursor', 'Windsurf'],
+  },
+  experience: [
+    {
+      role: 'Senior Front-end Engineer (Front-end Lead)',
+      company: 'IntalentAI',
+      period: "Jan '26 – Present",
+      location: 'Remote',
+      points: [
+        'Leading UI architecture for AI-powered recruitment platform; managing 2 junior frontend engineers.',
+        'Designed scalable multi-tenant Next.js architecture with pixel-perfect UI and high-performance rendering.',
+        'Integrated Azure AKS, Azure Functions, Azure Storage, and Queue services into front-end workflows.',
+        'Engineered resume extraction, validation pipelines, dynamic scheduling, and pricing interfaces.',
+      ],
+    },
+    {
+      role: 'Software Engineer – Full Stack',
+      company: 'Crownstack Technologies Pvt. Ltd.',
+      period: "Feb '24 – Jan '26",
+      location: 'Onsite',
+      points: [
+        'Built and maintained Next.js applications integrated with NestJS microservices.',
+        'Developed faceted filtering search, scheduling modules, and workflow-based dashboards.',
+        'Integrated Microsoft Graph, Azure services, and authentication frameworks.',
+        'Projects: IntalentAI, UnlockLife, Lxmedical, Quicklabs.',
+      ],
+    },
+    {
+      role: 'Front-end Developer',
+      company: 'Deepneura Technologies LLP',
+      period: "Jan '23 – Feb '24",
+      location: 'Remote',
+      points: [
+        'Designed React & Angular interfaces for AI-driven business applications.',
+        'Integrated APIs and database services for secure, efficient data handling.',
+        'Delivered high-fidelity UI aligned with product design specifications.',
+      ],
+    },
+  ],
+  projects: [
+    {
+      name: 'Intalent AI',
+      description: 'Full-stack AI-powered recruitment system with resume parsing, job application processing, RBAC, Microsoft Graph & Azure Queue integrations. PostgreSQL JSONB search and faceted filtering.',
+      tech: ['Next.js', 'TypeScript', 'NestJS', 'PostgreSQL', 'Prisma', 'Azure'],
+      link: 'https://intalent.ai/',
+      date: 'Jun 2025',
+    },
+    {
+      name: 'Winity.life',
+      description: 'NestJS APIs for wallet creation, blockchain transactions, multi-chain (Ethereum, Tron, Solana, BSC, Polygon). Sumsub KYC/AML, Reap payments, React Native & React admin.',
+      tech: ['NestJS', 'React Native', 'React', 'Blockchain'],
+      link: 'https://winity.life',
+      date: 'Sep 2025',
+    },
+    {
+      name: 'UnlockLife',
+      description: 'Scheduling-intensive digital community platform with event calendar, registration workflows, Redux state management, MUI & Tailwind component libraries.',
+      tech: ['Next.js', 'TypeScript', 'Redux', 'MUI', 'TailwindCSS'],
+      link: 'https://www.unlocklife.today/',
+      date: 'Mar 2024',
+    },
+  ],
+  achievements: [
+    'Rockstar Rookie Award – Crownstack',
+    'Project Hero Award – Crownstack',
+    'Leadership Recognition – Crownstack',
+    '500+ DSA problems solved (LeetCode, GfG)',
+    'Secretary – Forum of Chemical Engineering, BIET Jhansi',
+    'Head of Design – Drone Learners Club',
+    'Winner – Techzion, BIET Jhansi',
+  ],
+  education: {
+    degree: 'B.Tech – Chemical Engineering',
+    institute: 'Bundelkhand Institute of Engineering and Technology, Jhansi',
+    period: '2018 – 2022',
+  },
+  certification: 'Full Stack Web Developer – AccioJob',
+}
