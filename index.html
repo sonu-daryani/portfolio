@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
   <head>
+    <script>
+      (function() {
+        var k = 'portfolio-theme';
+        var v = localStorage.getItem(k);
+        var el = document.documentElement;
+        if (v === 'light' || v === 'dark') {
+          el.classList.remove('dark', 'light');
+          el.classList.add(v);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+          el.classList.remove('dark', 'light');
+          el.classList.add('light');
+        }
+      })();
+    </script>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

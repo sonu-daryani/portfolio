@@ -7,7 +7,7 @@ interface FooterProps {
 
 export default function Footer({ profile }: FooterProps) {
   return (
-    <footer className="border-t border-theme-border py-6 sm:py-8 px-4 sm:px-6 md:px-12 bg-theme-strong/30 backdrop-blur-sm flex-shrink-0">
+    <footer className="site-footer border-t border-theme-border py-6 sm:py-8 px-4 sm:px-6 md:px-12 bg-theme-strong/30 backdrop-blur-sm flex-shrink-0">
       <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
         <p className="text-theme-muted text-sm">
           © {new Date().getFullYear()} {profile.name}. Built with Vite + React + Three.js

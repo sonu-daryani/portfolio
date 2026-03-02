@@ -36,9 +36,9 @@ export default function FloatingOrbs({ isDay }: FloatingOrbsProps) {
           >
             <sphereGeometry args={[1, 32, 32]} />
             <meshBasicMaterial
-              color="#e0f2fe"
+              color="#e2e8f0"
               transparent
-              opacity={0.35}
+              opacity={0.2}
               depthWrite={false}
             />
           </mesh>

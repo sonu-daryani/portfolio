@@ -43,9 +43,9 @@ export default function ParticleField({ isDay }: ParticleFieldProps) {
         </bufferGeometry>
         <pointsMaterial
           size={0.04}
-          color="#e0f2fe"
+          color="#94a3b8"
           transparent
-          opacity={0.4}
+          opacity={0.25}
           sizeAttenuation
           depthWrite={false}
         />

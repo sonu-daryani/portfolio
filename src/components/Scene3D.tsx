@@ -15,18 +15,20 @@ interface Scene3DProps {
 
 export default function Scene3D({ theme }: Scene3DProps) {
   const groupRef = useRef<Group>(null)
-  const { scene } = useThree()
+  const { scene, gl } = useThree()
   const isDay = theme === 'light'
 
   useEffect(() => {
     if (isDay) {
-      scene.background = new THREE.Color(0xb8d4e8)
+      scene.background = new THREE.Color(0xffffff)
+      gl.setClearColor(0xffffff, 1)
       scene.fog = null
     } else {
       scene.background = null
+      gl.setClearColor(0x030306, 1)
       scene.fog = null
     }
-  }, [isDay, scene])
+  }, [isDay, scene, gl])
 
   useFrame((state) => {
     if (groupRef.current) {
@@ -39,9 +41,9 @@ export default function Scene3D({ theme }: Scene3DProps) {
       {isDay ? (
         <>
           <SkyDay />
-          <ambientLight intensity={0.9} />
-          <directionalLight position={[10, 15, 10]} intensity={1.4} color="#fff8e7" castShadow />
-          <pointLight position={[-5, 5, 5]} intensity={0.4} color="#bfdbfe" />
+          <ambientLight intensity={0.95} />
+          <directionalLight position={[10, 15, 10]} intensity={1.2} color="#ffffff" castShadow />
+          <pointLight position={[-5, 5, 5]} intensity={0.3} color="#ffffff" />
         </>
       ) : (
         <>

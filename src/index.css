@@ -11,9 +11,18 @@
 html {
   scroll-behavior: smooth;
   height: 100%;
+  /* Default (dark) – applied before React so production first paint is correct */
+  --theme-text: #f8fafc;
+  --theme-muted: #cbd5e1;
+  --theme-strong: #000000;
+  --theme-bg: #000000;
+  --theme-bg-canvas: #000000;
+  --theme-on-accent: #000000;
+  --theme-card: rgba(255, 255, 255, 0.05);
+  --theme-border: rgba(255, 255, 255, 0.08);
 }
 
-/* Dark theme (default) – black */
+/* Dark theme – explicit (same as default) */
 html.dark {
   --theme-text: #f8fafc;
   --theme-muted: #cbd5e1;
@@ -34,20 +43,20 @@ body {
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-/* Light theme – clean light */
+/* Light theme – total white bg, only text is dark */
 html.light {
-  --theme-text: #0f172a;
-  --theme-muted: #64748b;
+  --theme-text: #1e293b;
+  --theme-muted: #475569;
   --theme-strong: #ffffff;
-  --theme-bg: #f8fafc;
-  --theme-bg-canvas: #e2e8f0;
-  --theme-on-accent: #1e1b4b;
-  --theme-card: rgba(255, 255, 255, 0.9);
+  --theme-bg: #ffffff;
+  --theme-bg-canvas: #ffffff;
+  --theme-on-accent: #ffffff;
+  --theme-card: #ffffff;
   --theme-border: rgba(0, 0, 0, 0.06);
 }
 
 html.light body {
-  background: var(--theme-bg);
+  background: #ffffff;
   color: var(--theme-text);
 }
 
@@ -68,6 +77,12 @@ html.light body {
 /* Canvas wrapper – matches theme */
 .canvas-bg {
   background: var(--theme-bg-canvas, #030306);
+}
+
+/* Light theme – canvas must be white (no purple) */
+html.light .canvas-bg,
+.canvas-bg.canvas-bg-light {
+  background: #ffffff !important;
 }
 
 /* Card shadows – global so production build is consistent */
@@ -130,6 +145,36 @@ html.light body {
     0 16px 40px -8px rgba(124, 58, 237, 0.5);
 }
 
+/* Light theme – all components white/light, no dark */
+html.light .btn-liquid {
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+html.light .btn-liquid:hover {
+  background: #fafafa;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+html.light .btn-primary {
+  background: linear-gradient(180deg, #e9d5ff 0%, #ddd6fe 100%);
+  color: #1e293b;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+html.light .btn-primary:hover {
+  background: linear-gradient(180deg, #ede9fe 0%, #e9d5ff 100%);
+  color: #1e293b;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+/* Light theme – cards pure white, soft shadow only */
+html.light .card-shadow {
+  background: #ffffff !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+html.light .card-shadow-hover:hover {
+  background: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -148,9 +193,42 @@ html.light body {
   background: #a78bfa;
 }
 
+/* Light theme – nav, footer, toggle: solid white */
+html.light .nav-bar {
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+html.light .site-footer {
+  background: #ffffff;
+}
+html.light .mobile-menu-overlay {
+  background: #ffffff;
+}
+html.light .theme-toggle {
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+html.light ::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+html.light ::-webkit-scrollbar-thumb {
+  background: #c4b5fd;
+}
+
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: #a78bfa;
+}
+
 /* Selection */
 ::selection {
   background: rgba(167, 139, 250, 0.3);
+  color: var(--theme-text);
+}
+
+html.light ::selection {
+  background: rgba(124, 58, 237, 0.2);
   color: var(--theme-text);
 }
 

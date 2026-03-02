@@ -2,8 +2,13 @@
 export default {
   darkMode: 'class',
   content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    './index.html',
+    './src/**/*.{js,ts,jsx,tsx}',
+  ],
+  /* Keep theme/accent utilities in production build (avoid purging) */
+  safelist: [
+    { pattern: /^(bg|text|border|ring)-theme(-|$)/ },
+    { pattern: /^(bg|text|border)-accent(-|$)/ },
   ],
   theme: {
     extend: {

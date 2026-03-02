@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import type { SectionId } from '../App'
 import Button from './ui/Button'
+import ThemeToggle from './ThemeToggle'
 
 interface SectionItem {
   id: SectionId
@@ -23,7 +24,7 @@ export default function Nav({ menuOpen, setMenuOpen, activeSection, onNavigate, 
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <nav className="max-w-6xl mx-auto flex items-center justify-between rounded-xl sm:rounded-2xl py-2.5 px-3 sm:py-3 sm:px-5 bg-theme-strong/80 dark:bg-theme-strong/60 backdrop-blur-xl shadow-lg">
+      <nav className="nav-bar max-w-6xl mx-auto flex items-center justify-between rounded-xl sm:rounded-2xl py-2.5 px-3 sm:py-3 sm:px-5 bg-theme-strong/80 dark:bg-theme-strong/60 backdrop-blur-xl shadow-lg">
         <Button
           variant="ghost"
           className="text-lg font-bold tracking-tight !p-0 !rounded-none min-w-0"
@@ -46,17 +47,20 @@ export default function Nav({ menuOpen, setMenuOpen, activeSection, onNavigate, 
             </li>
           ))}
         </ul>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="md:hidden !rounded-xl flex flex-col justify-center gap-1.5"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-        >
+        <div className="flex items-center gap-3">
+          <ThemeToggle />
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden !rounded-xl flex flex-col justify-center gap-1.5"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+          >
           <span className={`block h-0.5 bg-theme rounded-full transition-transform ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />
           <span className={`block h-0.5 bg-theme rounded-full transition-opacity ${menuOpen ? 'opacity-0' : ''}`} />
           <span className={`block h-0.5 bg-theme rounded-full transition-transform ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
-        </Button>
+          </Button>
+        </div>
       </nav>
     </motion.header>
   )

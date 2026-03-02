@@ -20,9 +20,9 @@ export default function TorusRing({ isDay }: TorusRingProps) {
     <mesh ref={meshRef} position={[0, 0, -4]} scale={1.8}>
       <torusGeometry args={[2.2, 0.03, 16, 100]} />
       <meshBasicMaterial
-        color={isDay ? '#93c5fd' : '#a78bfa'}
+        color={isDay ? '#94a3b8' : '#a78bfa'}
         transparent
-        opacity={isDay ? 0.25 : 0.4}
+        opacity={isDay ? 0.18 : 0.4}
         side={THREE.DoubleSide}
         depthWrite={false}
       />

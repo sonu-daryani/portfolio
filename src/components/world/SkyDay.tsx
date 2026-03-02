@@ -41,8 +41,8 @@ export default function SkyDay() {
         vertexShader={vertexShader}
         fragmentShader={fragmentShader}
         uniforms={{
-          uTopColor: { value: new THREE.Color('#87ceeb') },
-          uBottomColor: { value: new THREE.Color('#e0f2fe') },
+          uTopColor: { value: new THREE.Color('#ffffff') },
+          uBottomColor: { value: new THREE.Color('#ffffff') },
           uOffset: { value: 0 },
         }}
         side={THREE.BackSide}

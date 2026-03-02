@@ -42,7 +42,7 @@ interface ShaderUniforms {
 }
 
 const DARK_COLORS = { c1: '#4c1d95', c2: '#7c3aed' }
-const LIGHT_COLORS = { c1: '#93c5fd', c2: '#bfdbfe' }
+const LIGHT_COLORS = { c1: '#f1f5f9', c2: '#ffffff' }
 
 interface DisplacementSphereProps {
   isDay: boolean

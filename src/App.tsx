@@ -35,7 +35,7 @@ export default function App() {
 
   return (
     <>
-      <div className="fixed inset-0 z-0 canvas-bg">
+      <div className={`fixed inset-0 z-0 canvas-bg ${theme === 'light' ? 'canvas-bg-light' : ''}`}>
         <Canvas
           camera={{ position: [0, 0, 6], fov: 50 }}
           gl={{ alpha: true, antialias: true }}
@@ -125,7 +125,7 @@ export default function App() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="fixed inset-0 z-50 bg-theme-strong/95 backdrop-blur-xl flex items-center justify-center"
+            className="mobile-menu-overlay fixed inset-0 z-50 bg-theme-strong/95 backdrop-blur-xl flex items-center justify-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
