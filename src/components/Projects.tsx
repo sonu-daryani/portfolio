@@ -41,7 +41,7 @@ export default function Projects({ profile }: ProjectsProps) {
             clickable: true,
             el: '.projects-pagination',
           }}
-          className="projects-swiper h-[320px] sm:h-[340px] md:h-[360px] py-6 px-4 sm:px-6 md:px-8"
+          className="projects-swiper h-[380px] sm:h-[400px] md:h-[420px] py-6 px-4 sm:px-6 md:px-8"
         >
           {profile.projects.map((project) => (
             <SwiperSlide key={project.name}>
@@ -66,7 +66,7 @@ export default function Projects({ profile }: ProjectsProps) {
                   {project.tech.map((t) => (
                     <span
                       key={t}
-                      className="px-2.5 py-1 rounded-xl bg-accent/15 text-accent-light text-xs font-mono"
+                      className="project-tech-tag px-2.5 py-1 rounded-xl bg-accent/15 text-accent-light text-xs font-mono"
                     >
                       {t}
                     </span>

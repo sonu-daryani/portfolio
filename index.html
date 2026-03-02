@@ -9,9 +9,9 @@
         if (v === 'light' || v === 'dark') {
           el.classList.remove('dark', 'light');
           el.classList.add(v);
-        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-          el.classList.remove('dark', 'light');
-          el.classList.add('light');
+        } else {
+          el.classList.remove('light');
+          el.classList.add('dark');
         }
       })();
     </script>

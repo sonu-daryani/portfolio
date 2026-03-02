@@ -36,7 +36,7 @@ export default function Experience({ profile }: ExperienceProps) {
             clickable: true,
             el: '.experience-pagination',
           }}
-          className="experience-swiper h-[340px] sm:h-[360px] md:h-[380px]"
+          className="experience-swiper h-[380px] sm:h-[400px] md:h-[420px]"
         >
           {profile.experience.map((job) => (
             <SwiperSlide key={job.company}>

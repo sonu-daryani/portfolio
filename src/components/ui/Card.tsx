@@ -35,10 +35,10 @@ const paddingMap = {
 }
 
 const baseClasses =
-  'relative overflow-hidden rounded-2xl bg-theme-card/80 backdrop-blur-xl transition-all duration-300 ease-out card-shadow'
+  'relative overflow-hidden rounded-2xl bg-theme-card/80 backdrop-blur-xl transition-all duration-300 ease-out'
 
 const interactiveClasses =
-  'hover:bg-theme-card/95 card-shadow-hover'
+  'hover:bg-theme-card/95'
 
 const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
   {

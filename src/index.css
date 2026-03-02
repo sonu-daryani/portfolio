@@ -207,9 +207,32 @@ html.light .site-footer {
 html.light .mobile-menu-overlay {
   background: #ffffff;
 }
-html.light .theme-toggle {
+/* Theme toggle – track: border + shadow for visibility in both themes */
+.theme-toggle-track {
+  background: linear-gradient(145deg, rgba(109, 73, 199, 0.3) 0%, rgba(47, 26, 81, 0.7) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(0, 0, 0, 0.2);
+}
+.theme-toggle-thumb {
+  background: linear-gradient(145deg, #f8fafc 0%, #e2e8f0 100%);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+html.light .theme-toggle-track {
   background: #ffffff;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+html.light .theme-toggle-thumb {
+  background: linear-gradient(180deg, #fafafa 0%, #f1f5f9 100%);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 1);
 }
 
 html.light ::-webkit-scrollbar-track {
@@ -248,6 +271,40 @@ html.light ::selection {
   transform: scale(1.2);
 }
 
+/* Swiper – light theme: visible pagination and nav */
+html.light .swiper-pagination-bullet {
+  background: rgba(0, 0, 0, 0.25);
+  opacity: 0.8;
+}
+html.light .swiper-pagination-bullet-active {
+  background: #7c3aed;
+  opacity: 1;
+  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.3);
+}
+html.light .projects-prev,
+html.light .projects-next,
+html.light .experience-prev,
+html.light .experience-next {
+  background: #ffffff !important;
+  color: #1e293b !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+}
+html.light .projects-prev:hover,
+html.light .projects-next:hover,
+html.light .experience-prev:hover,
+html.light .experience-next:hover {
+  border-color: rgba(124, 58, 237, 0.35) !important;
+  color: #7c3aed !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(124, 58, 237, 0.15) !important;
+}
+
+/* Projects – tech tags readable in light theme */
+html.light .project-tech-tag {
+  background: rgba(124, 58, 237, 0.12) !important;
+  color: #5b21b6 !important;
+}
+
 /* Swiper – consistent card heights (slides fill container) */
 .projects-swiper.projects-swiper .swiper-wrapper,
 .projects-swiper.projects-swiper .swiper-slide {
@@ -269,17 +326,5 @@ html.light ::selection {
 .projects-swiper .swiper-slide > article,
 .experience-swiper .swiper-slide > a,
 .experience-swiper .swiper-slide > article {
-  transition: box-shadow 0.25s ease, background 0.25s ease;
-}
-.projects-swiper .swiper-slide-active > a,
-.projects-swiper .swiper-slide-active > article,
-.experience-swiper .swiper-slide-active > a,
-.experience-swiper .swiper-slide-active > article {
-  box-shadow: 0 20px 50px -16px rgba(0,0,0,0.6), 0 0 48px -12px rgba(167,139,250,0.25);
-}
-.projects-swiper .swiper-slide > a:hover,
-.projects-swiper .swiper-slide > article:hover,
-.experience-swiper .swiper-slide > a:hover,
-.experience-swiper .swiper-slide > article:hover {
-  box-shadow: 0 20px 50px -16px rgba(0,0,0,0.6), 0 0 48px -12px rgba(167,139,250,0.25);
+  transition: background 0.25s ease;
 }
