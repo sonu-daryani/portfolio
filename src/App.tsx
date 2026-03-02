@@ -44,7 +44,7 @@ export default function App() {
         </Canvas>
       </div>
 
-      <div className="relative z-10 flex flex-col min-h-screen">
+      <div className="relative z-10 flex flex-col h-screen max-h-screen overflow-hidden">
         <Nav
           menuOpen={menuOpen}
           setMenuOpen={setMenuOpen}
@@ -53,7 +53,7 @@ export default function App() {
           sections={SECTIONS}
         />
 
-        <main className="flex-1 min-h-0 overflow-y-auto pt-20 pb-24 px-0">
+        <main className="flex-1 min-h-0 main-scroll pt-16 sm:pt-20 pb-20 sm:pb-24 px-0">
           <AnimatePresence mode="wait">
             {activeSection === 'home' && (
               <motion.div
@@ -124,14 +124,14 @@ export default function App() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="fixed inset-0 z-50 bg-theme-strong/95 backdrop-blur-md flex items-center justify-center"
+            className="fixed inset-0 z-50 bg-theme-strong/95 backdrop-blur-xl flex items-center justify-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setMenuOpen(false)}
           >
             <motion.nav
-              className="flex flex-col gap-6 text-center"
+              className="flex flex-col gap-2 text-center"
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 20, opacity: 0 }}
@@ -142,7 +142,7 @@ export default function App() {
                   type="button"
                   key={id}
                   onClick={() => goTo(id)}
-                  className="text-2xl font-semibold text-theme hover:text-accent transition-colors"
+                  className="text-2xl font-semibold text-theme hover:text-accent py-3 px-6 rounded-2xl hover:bg-theme-card transition-all"
                 >
                   {label}
                 </button>

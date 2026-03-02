@@ -10,37 +10,40 @@
 
 html {
   scroll-behavior: smooth;
-  overflow: hidden;
   height: 100%;
 }
 
-/* Dark theme (default) – darker background */
+/* Dark theme (default) – black */
 html.dark {
-  --theme-text: #f1f5f9;
-  --theme-muted: #94a3b8;
-  --theme-strong: #030306;
-  --theme-bg: #030306;
-  --theme-bg-canvas: #030306;
-  --theme-on-accent: #030306;
+  --theme-text: #f8fafc;
+  --theme-muted: #cbd5e1;
+  --theme-strong: #000000;
+  --theme-bg: #000000;
+  --theme-bg-canvas: #000000;
+  --theme-on-accent: #000000;
+  --theme-card: rgba(255, 255, 255, 0.05);
+  --theme-border: rgba(255, 255, 255, 0.08);
 }
 
 body {
-  font-family: 'Outfit', system-ui, sans-serif;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   background: var(--theme-bg, #030306);
-  color: var(--theme-text, #f1f5f9);
-  overflow: hidden;
+  color: var(--theme-text, #f8fafc);
   height: 100%;
+  overflow-x: hidden;
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-/* Light theme – lighter UI */
+/* Light theme – clean light */
 html.light {
   --theme-text: #0f172a;
   --theme-muted: #64748b;
-  --theme-strong: #f8fafc;
-  --theme-bg: #f1f5f9;
-  --theme-bg-canvas: #b8d4e8;
+  --theme-strong: #ffffff;
+  --theme-bg: #f8fafc;
+  --theme-bg-canvas: #e2e8f0;
   --theme-on-accent: #1e1b4b;
+  --theme-card: rgba(255, 255, 255, 0.9);
+  --theme-border: rgba(0, 0, 0, 0.06);
 }
 
 html.light body {
@@ -51,6 +54,15 @@ html.light body {
 #root {
   height: 100%;
   min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Main scroll area – smooth touch scrolling */
+.main-scroll {
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
 }
 
 /* Canvas wrapper – matches theme */
@@ -69,7 +81,7 @@ html.light body {
 
 ::-webkit-scrollbar-thumb {
   background: #7c3aed;
-  border-radius: 4px;
+  border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -93,4 +105,40 @@ html.light body {
   background: #a78bfa;
   opacity: 1;
   transform: scale(1.2);
+}
+
+/* Swiper – consistent card heights (slides fill container) */
+.projects-swiper.projects-swiper .swiper-wrapper,
+.projects-swiper.projects-swiper .swiper-slide {
+  height: 100%;
+}
+.experience-swiper.experience-swiper .swiper-wrapper,
+.experience-swiper.experience-swiper .swiper-slide {
+  height: 100%;
+}
+
+/* Swiper – active card bigger, hover makes card bigger */
+.projects-swiper .swiper-slide > a,
+.projects-swiper .swiper-slide > article,
+.experience-swiper .swiper-slide > a,
+.experience-swiper .swiper-slide > article {
+  transition: transform 0.25s ease;
+}
+.projects-swiper .swiper-slide-active > a,
+.projects-swiper .swiper-slide-active > article,
+.experience-swiper .swiper-slide-active > a,
+.experience-swiper .swiper-slide-active > article {
+  transform: scale(1.06) !important;
+}
+.projects-swiper .swiper-slide > a:hover,
+.projects-swiper .swiper-slide > article:hover,
+.experience-swiper .swiper-slide > a:hover,
+.experience-swiper .swiper-slide > article:hover {
+  transform: scale(1.06) !important;
+}
+.projects-swiper .swiper-slide-active > a:hover,
+.projects-swiper .swiper-slide-active > article:hover,
+.experience-swiper .swiper-slide-active > a:hover,
+.experience-swiper .swiper-slide-active > article:hover {
+  transform: scale(1.1) !important;
 }

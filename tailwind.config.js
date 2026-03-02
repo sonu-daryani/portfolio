@@ -8,7 +8,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Outfit', 'system-ui', 'sans-serif'],
+        sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
       },
       colors: {
@@ -16,6 +16,8 @@ export default {
           DEFAULT: 'var(--theme-text)',
           muted: 'var(--theme-muted)',
           strong: 'var(--theme-strong)',
+          card: 'var(--theme-card)',
+          border: 'var(--theme-border)',
         },
         accent: {
           DEFAULT: '#a78bfa',

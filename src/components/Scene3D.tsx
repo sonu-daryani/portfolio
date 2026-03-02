@@ -6,7 +6,6 @@ import DisplacementSphere from '../shaders/displacementSphere'
 import ParticleField from './world/ParticleField'
 import FloatingOrbs from './world/FloatingOrbs'
 import TorusRing from './world/TorusRing'
-import Earth3D from './world/Earth3D'
 import SkyDay from './world/SkyDay'
 import type { Theme } from '../context/ThemeContext'
 
@@ -60,7 +59,6 @@ export default function Scene3D({ theme }: Scene3DProps) {
       </group>
 
       <FloatingOrbs isDay={isDay} />
-      <Earth3D isDay={isDay} />
     </>
   )
 }

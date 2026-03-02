@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import type { Profile } from '../types/profile'
+import Card from './ui/Card'
 
 interface ContactProps {
   profile: Profile
@@ -7,10 +8,10 @@ interface ContactProps {
 
 export default function Contact({ profile }: ContactProps) {
   return (
-    <section className="min-h-[calc(100vh-8rem)] flex flex-col justify-center px-6 md:px-12 lg:px-24 py-24">
-      <div className="max-w-2xl mx-auto text-center">
+    <section className="min-h-[calc(100vh-8rem)] flex flex-col justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24 py-12 sm:py-16 md:py-20 lg:py-24">
+      <div className="max-w-2xl mx-auto w-full min-w-0 text-center">
         <motion.h2
-          className="text-3xl md:text-4xl font-bold text-theme mb-6"
+          className="text-2xl sm:text-3xl md:text-4xl font-bold text-theme mb-4 sm:mb-6 tracking-tight"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -18,7 +19,7 @@ export default function Contact({ profile }: ContactProps) {
           Get in touch
         </motion.h2>
         <motion.p
-          className="text-theme-muted mb-12"
+          className="text-theme-muted mb-12 text-lg max-w-md mx-auto"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -27,29 +28,37 @@ export default function Contact({ profile }: ContactProps) {
           Open to new opportunities. Let's build something great together.
         </motion.p>
         <motion.div
-          className="flex flex-wrap justify-center gap-6"
+          className="flex flex-wrap justify-center gap-3 sm:gap-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
         >
-          <a
+          <Card
+            as="a"
             href={`mailto:${profile.email}`}
-            className="flex items-center gap-2 px-6 py-3 rounded-xl bg-white/5 border border-white/10 hover:border-accent/40 hover:text-accent transition-colors"
+            padding="md"
+            interactive
+            liquid
+            className="flex items-center gap-3 w-full sm:w-auto sm:min-w-[240px] justify-center"
           >
-            <span className="font-mono text-sm">Email</span>
-            <span className="text-theme">{profile.email}</span>
-          </a>
-          <a
+            <span className="font-mono text-sm text-accent shrink-0">Email</span>
+            <span className="text-theme font-medium truncate min-w-0">{profile.email}</span>
+          </Card>
+          <Card
+            as="a"
             href={`tel:${profile.phone.replace(/\s/g, '')}`}
-            className="flex items-center gap-2 px-6 py-3 rounded-xl bg-white/5 border border-white/10 hover:border-accent/40 hover:text-accent transition-colors"
+            padding="md"
+            interactive
+            liquid
+            className="flex items-center gap-3 w-full sm:w-auto sm:min-w-[240px] justify-center"
           >
-            <span className="font-mono text-sm">Phone</span>
-            <span className="text-theme">{profile.phone}</span>
-          </a>
+            <span className="font-mono text-sm text-accent shrink-0">Phone</span>
+            <span className="text-theme font-medium truncate min-w-0">{profile.phone}</span>
+          </Card>
         </motion.div>
         <motion.div
-          className="mt-10 flex justify-center gap-4"
+          className="mt-10 flex justify-center gap-6"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -59,7 +68,7 @@ export default function Contact({ profile }: ContactProps) {
             href={profile.links.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-theme-muted hover:text-accent transition-colors"
+            className="text-theme-muted hover:text-accent transition-colors text-sm font-medium"
             aria-label="LinkedIn"
           >
             LinkedIn
@@ -68,19 +77,10 @@ export default function Contact({ profile }: ContactProps) {
             href={profile.links.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-theme-muted hover:text-accent transition-colors"
+            className="text-theme-muted hover:text-accent transition-colors text-sm font-medium"
             aria-label="GitHub"
           >
             GitHub
-          </a>
-          <a
-            href={profile.links.winity}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-theme-muted hover:text-accent transition-colors"
-            aria-label="Winity"
-          >
-            winity.life
           </a>
         </motion.div>
       </div>

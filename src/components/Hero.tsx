@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion'
+import { useRef } from 'react'
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import type { Profile } from '../types/profile'
 
 interface HeroProps {
@@ -6,71 +7,233 @@ interface HeroProps {
   onNavigateContact?: () => void
 }
 
+const stagger = 0.08
+const duration = 0.5
+
 export default function Hero({ profile, onNavigateContact }: HeroProps) {
+  const cardRef = useRef<HTMLDivElement>(null)
+  const x = useMotionValue(0.5)
+  const y = useMotionValue(0.5)
+  const spring = { type: 'spring' as const, stiffness: 300, damping: 30 }
+  const rotateX = useSpring(useTransform(y, [0, 1], [8, -8]), spring)
+  const rotateY = useSpring(useTransform(x, [0, 1], [-8, 8]), spring)
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return
+    const rect = cardRef.current.getBoundingClientRect()
+    const w = rect.width
+    const h = rect.height
+    x.set((e.clientX - rect.left) / w)
+    y.set((e.clientY - rect.top) / h)
+  }
+
+  const handleMouseLeave = () => {
+    x.set(0.5)
+    y.set(0.5)
+  }
+
   return (
-    <section className="min-h-[calc(100vh-8rem)] flex flex-col justify-center px-6 md:px-12 lg:px-24 py-24">
-      <div className="max-w-5xl mx-auto">
-        <motion.p
-          className="text-accent font-mono text-sm mb-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          Hi, I'm
-        </motion.p>
-        <motion.h1
-          className="text-4xl md:text-5xl lg:text-6xl font-bold text-theme mb-4 tracking-tight"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-        >
-          {profile.name}
-        </motion.h1>
-        <motion.p
-          className="text-xl md:text-2xl text-theme-muted mb-6 max-w-2xl"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          {profile.title}
-        </motion.p>
-        <motion.p
-          className="text-theme-muted mb-10 max-w-xl"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-        >
-          {profile.tagline}
-        </motion.p>
+    <section className="min-h-[calc(100vh-8rem)] flex flex-col justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24 py-12 sm:py-16 md:py-20 lg:py-24">
+      <div className="max-w-6xl mx-auto w-full">
         <motion.div
-          className="flex flex-wrap gap-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
+          ref={cardRef}
+          className="flex flex-col lg:flex-row items-center lg:items-start gap-8 sm:gap-10 md:gap-12 lg:gap-14 xl:gap-16"
+          style={{
+            perspective: 1000,
+            rotateX,
+            rotateY,
+            transformStyle: 'preserve-3d',
+          }}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+          initial="hidden"
+          animate="visible"
+          variants={{
+            visible: { transition: { staggerChildren: stagger, delayChildren: 0.1 } },
+            hidden: {},
+          }}
         >
-          <button
-            type="button"
-            onClick={onNavigateContact}
-            className="px-6 py-3 rounded-lg bg-accent text-on-accent font-semibold hover:bg-accent-light transition-colors"
+          {/* Image - responsive order: first on mobile, left on desktop */}
+          <motion.div
+            className="flex-shrink-0 w-full max-w-[280px] sm:max-w-[320px] md:max-w-[340px] lg:max-w-none lg:w-72 xl:w-80"
+            style={{ transform: 'translateZ(24px)' }}
+            variants={{
+              hidden: { opacity: 0, y: 24, rotateY: -12 },
+              visible: {
+                opacity: 1,
+                y: 0,
+                rotateY: 0,
+                transition: { duration, ease: [0.22, 0.61, 0.36, 1] },
+              },
+            }}
           >
-            Get in touch
-          </button>
-          <a
-            href={profile.links.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-3 rounded-lg border border-theme-muted text-theme hover:border-accent hover:text-accent transition-colors"
+            <motion.div
+              className="relative overflow-hidden rounded-[1.35rem] sm:rounded-[1.5rem] bg-theme-card/30"
+              style={{
+                transform: 'translateZ(0)',
+                boxShadow: '0 8px 32px -8px rgba(0,0,0,0.5), 0 16px 48px -16px rgba(0,0,0,0.4)',
+              }}
+              whileHover={{
+                scale: 1.02,
+                boxShadow: '0 20px 50px -16px rgba(0,0,0,0.55), 0 0 40px -12px rgba(167,139,250,0.2)',
+                transition: { duration: 0.25 },
+              }}
+            >
+              <img
+                src={profile.image}
+                alt={profile.name}
+                className="w-full aspect-square object-cover rounded-[1.35rem] sm:rounded-[1.5rem]"
+              />
+              <span
+                className="pointer-events-none absolute inset-0 rounded-[1.35rem] sm:rounded-[1.5rem] opacity-80"
+                style={{
+                  background: 'linear-gradient(160deg, transparent 30%, rgba(167,139,250,0.06) 100%)',
+                }}
+                aria-hidden
+              />
+            </motion.div>
+          </motion.div>
+
+          {/* Content */}
+          <div
+            className="flex-1 min-w-0 text-center lg:text-left flex flex-col items-center lg:items-start"
+            style={{ transform: 'translateZ(16px)' }}
           >
-            GitHub
-          </a>
-          <a
-            href={profile.links.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-3 rounded-lg border border-theme-muted text-theme hover:border-accent hover:text-accent transition-colors"
-          >
-            LinkedIn
-          </a>
+            <motion.p
+              className="text-accent font-mono text-sm sm:text-base tracking-wide mb-2 sm:mb-3"
+              variants={{
+                hidden: { opacity: 0, x: -20 },
+                visible: { opacity: 1, x: 0, transition: { duration } },
+              }}
+            >
+              Hi, I'm
+            </motion.p>
+            <motion.h1
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-theme tracking-tight leading-[1.1] mb-2 sm:mb-4"
+              variants={{
+                hidden: { opacity: 0, y: 20, rotateX: 10 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  rotateX: 0,
+                  transition: { duration, ease: [0.22, 0.61, 0.36, 1] },
+                },
+              }}
+            >
+              {profile.name}
+            </motion.h1>
+            <motion.p
+              className="text-lg sm:text-xl md:text-2xl text-theme-muted font-medium mb-3 sm:mb-4 max-w-2xl"
+              variants={{
+                hidden: { opacity: 0, y: 16 },
+                visible: { opacity: 1, y: 0, transition: { duration } },
+              }}
+            >
+              {profile.title}
+            </motion.p>
+            <motion.p
+              className="text-theme-muted text-sm sm:text-base mb-8 sm:mb-10 md:mb-12 max-w-xl leading-relaxed"
+              variants={{
+                hidden: { opacity: 0, y: 16 },
+                visible: { opacity: 1, y: 0, transition: { duration } },
+              }}
+            >
+              {profile.tagline}
+            </motion.p>
+
+            <motion.div
+              className="flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-4"
+              variants={{
+                hidden: { opacity: 0, y: 16 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration, staggerChildren: 0.06, delayChildren: 0.1 },
+                },
+              }}
+            >
+              {[
+                {
+                  label: 'Get in touch',
+                  onClick: true,
+                  primary: true,
+                },
+                {
+                  label: 'GitHub',
+                  href: profile.links.github,
+                  primary: false,
+                },
+                {
+                  label: 'LinkedIn',
+                  href: profile.links.linkedin,
+                  primary: false,
+                },
+              ].map((item) => (
+                <motion.div
+                  key={item.label}
+                  variants={{
+                    hidden: { opacity: 0, y: 12 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+                  }}
+                  style={{ transform: 'translateZ(8px)' }}
+                >
+                  {item.onClick ? (
+                    <motion.button
+                      type="button"
+                      onClick={onNavigateContact}
+                      className="px-5 py-3 sm:px-6 sm:py-3.5 rounded-2xl font-semibold text-sm sm:text-base select-none touch-manipulation"
+                      style={{
+                        background: item.primary
+                          ? 'linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%)'
+                          : undefined,
+                        color: item.primary ? 'var(--theme-on-accent)' : undefined,
+                        boxShadow: item.primary
+                          ? '0 10px 25px -5px rgba(124, 58, 237, 0.35), 0 0 0 1px rgba(255,255,255,0.1) inset'
+                          : undefined,
+                        border: item.primary ? 'none' : '1px solid var(--theme-border)',
+                        backgroundColor: item.primary ? undefined : 'var(--theme-card)',
+                      }}
+                      whileHover={{
+                        scale: 1.05,
+                        rotateY: 2,
+                        rotateX: -2,
+                        boxShadow: item.primary
+                          ? '0 20px 40px -10px rgba(124, 58, 237, 0.45)'
+                          : '0 12px 24px -8px rgba(0,0,0,0.2)',
+                        transition: { duration: 0.2 },
+                      }}
+                      whileTap={{
+                        scale: 0.98,
+                        transition: { duration: 0.1 },
+                      }}
+                    >
+                      {item.label}
+                    </motion.button>
+                  ) : (
+                    <motion.a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block px-5 py-3 sm:px-6 sm:py-3.5 rounded-2xl font-semibold text-sm sm:text-base border border-theme-border bg-theme-card/80 backdrop-blur-sm text-theme hover:border-accent/50 hover:text-accent select-none touch-manipulation"
+                      whileHover={{
+                        scale: 1.05,
+                        rotateY: 2,
+                        rotateX: -2,
+                        boxShadow: '0 12px 24px -8px rgba(0,0,0,0.2)',
+                        transition: { duration: 0.2 },
+                      }}
+                      whileTap={{
+                        scale: 0.98,
+                        transition: { duration: 0.1 },
+                      }}
+                    >
+                      {item.label}
+                    </motion.a>
+                  )}
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>

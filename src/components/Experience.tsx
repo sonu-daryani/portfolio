@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination } from 'swiper/modules'
 import type { Profile } from '../types/profile'
+import Card from './ui/Card'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
@@ -12,10 +13,10 @@ interface ExperienceProps {
 
 export default function Experience({ profile }: ExperienceProps) {
   return (
-    <section className="min-h-[calc(100vh-8rem)] flex flex-col justify-center px-6 md:px-12 lg:px-24 py-24">
-      <div className="max-w-4xl mx-auto w-full">
+    <section className="min-h-[calc(100vh-8rem)] flex flex-col justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24 py-12 sm:py-16 md:py-20 lg:py-24">
+      <div className="max-w-4xl mx-auto w-full min-w-0">
         <motion.h2
-          className="text-3xl md:text-4xl font-bold text-theme mb-10"
+          className="text-2xl sm:text-3xl md:text-4xl font-bold text-theme mb-6 sm:mb-10 tracking-tight"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
@@ -34,11 +35,17 @@ export default function Experience({ profile }: ExperienceProps) {
             clickable: true,
             el: '.experience-pagination',
           }}
-          className="!overflow-visible"
+          className="experience-swiper !overflow-visible h-[340px] sm:h-[360px] md:h-[380px]"
         >
           {profile.experience.map((job) => (
             <SwiperSlide key={job.company}>
-              <article className="rounded-2xl bg-white/5 border border-white/10 p-6 md:p-8 hover:border-accent/30 transition-colors h-full min-h-[320px] flex flex-col">
+              <Card
+                as="article"
+                padding="lg"
+                interactive
+                liquid
+                className="h-full min-h-0 flex flex-col"
+              >
                 <div className="flex flex-wrap items-baseline justify-between gap-2 mb-4">
                   <h3 className="text-xl font-semibold text-theme">{job.role}</h3>
                   <span className="text-theme-muted text-sm font-mono">{job.period}</span>
@@ -54,30 +61,34 @@ export default function Experience({ profile }: ExperienceProps) {
                     </li>
                   ))}
                 </ul>
-              </article>
+              </Card>
             </SwiperSlide>
           ))}
         </Swiper>
         <div className="flex items-center justify-center gap-4 mt-6">
-          <button
-            type="button"
-            className="experience-prev w-12 h-12 rounded-full border border-theme-muted/50 text-theme hover:border-accent hover:text-accent flex items-center justify-center transition-colors disabled:opacity-40"
+          <Card
+            as="button"
+            className="experience-prev w-12 h-12 flex items-center justify-center text-theme hover:border-accent hover:text-accent disabled:opacity-40"
+            padding="none"
+            interactive
             aria-label="Previous"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-          </button>
+          </Card>
           <div className="experience-pagination flex gap-1" />
-          <button
-            type="button"
-            className="experience-next w-12 h-12 rounded-full border border-theme-muted/50 text-theme hover:border-accent hover:text-accent flex items-center justify-center transition-colors disabled:opacity-40"
+          <Card
+            as="button"
+            className="experience-next w-12 h-12 flex items-center justify-center text-theme hover:border-accent hover:text-accent disabled:opacity-40"
+            padding="none"
+            interactive
             aria-label="Next"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
-          </button>
+          </Card>
         </div>
       </div>
     </section>
