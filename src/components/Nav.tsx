@@ -52,13 +52,13 @@ export default function Nav({ menuOpen, setMenuOpen, activeSection, onNavigate, 
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden !rounded-xl flex flex-col justify-center gap-1.5"
+            className="mobile-menu-btn md:hidden !rounded-xl flex flex-col justify-center gap-1.5"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
           >
-          <span className={`block h-0.5 bg-theme rounded-full transition-transform ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />
-          <span className={`block h-0.5 bg-theme rounded-full transition-opacity ${menuOpen ? 'opacity-0' : ''}`} />
-          <span className={`block h-0.5 bg-theme rounded-full transition-transform ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+            <span className={`mobile-menu-bar block h-0.5 w-5 bg-theme rounded-full transition-transform ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />
+            <span className={`mobile-menu-bar block h-0.5 w-5 bg-theme rounded-full transition-opacity ${menuOpen ? 'opacity-0' : ''}`} />
+            <span className={`mobile-menu-bar block h-0.5 w-5 bg-theme rounded-full transition-transform ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
           </Button>
         </div>
       </nav>

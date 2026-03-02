@@ -207,6 +207,23 @@ html.light .site-footer {
 html.light .mobile-menu-overlay {
   background: #ffffff;
 }
+
+/* Mobile menu toggle – visible in both themes */
+.mobile-menu-btn {
+  border: 1px solid var(--theme-border);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+.mobile-menu-btn .mobile-menu-bar {
+  background: var(--theme-text) !important;
+}
+html.light .mobile-menu-btn {
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+html.light .mobile-menu-btn .mobile-menu-bar {
+  background: #1e293b !important;
+}
+
 /* Theme toggle – track: border + shadow for visibility in both themes */
 .theme-toggle-track {
   background: linear-gradient(145deg, rgba(109, 73, 199, 0.3) 0%, rgba(47, 26, 81, 0.7) 100%);
