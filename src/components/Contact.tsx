@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import type { Profile } from '../types/profile'
 import Card from './ui/Card'
+import Button from './ui/Button'
 
 interface ContactProps {
   profile: Profile
@@ -58,30 +59,34 @@ export default function Contact({ profile }: ContactProps) {
           </Card>
         </motion.div>
         <motion.div
-          className="mt-10 flex justify-center gap-6"
+          className="mt-10 flex justify-center gap-4 flex-wrap"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
         >
-          <a
+          <Button
+            as="a"
             href={profile.links.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-theme-muted hover:text-accent transition-colors text-sm font-medium"
+            variant="ghost"
+            size="sm"
             aria-label="LinkedIn"
           >
             LinkedIn
-          </a>
-          <a
+          </Button>
+          <Button
+            as="a"
             href={profile.links.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-theme-muted hover:text-accent transition-colors text-sm font-medium"
+            variant="ghost"
+            size="sm"
             aria-label="GitHub"
           >
             GitHub
-          </a>
+          </Button>
         </motion.div>
       </div>
     </section>

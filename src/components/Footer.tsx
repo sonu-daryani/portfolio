@@ -1,4 +1,5 @@
 import type { Profile } from '../types/profile'
+import Button from './ui/Button'
 
 interface FooterProps {
   profile: Profile
@@ -11,13 +12,31 @@ export default function Footer({ profile }: FooterProps) {
         <p className="text-theme-muted text-sm">
           © {new Date().getFullYear()} {profile.name}. Built with Vite + React + Three.js
         </p>
-        <div className="flex gap-6">
-          <a href={profile.links.linkedin} target="_blank" rel="noopener noreferrer" className="text-theme-muted hover:text-accent text-sm font-medium transition-colors">
+        <div className="flex gap-4">
+          <Button
+            as="a"
+            href={profile.links.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            variant="ghost"
+            size="sm"
+            className="!p-0 min-w-0"
+            aria-label="LinkedIn"
+          >
             LinkedIn
-          </a>
-          <a href={profile.links.github} target="_blank" rel="noopener noreferrer" className="text-theme-muted hover:text-accent text-sm font-medium transition-colors">
+          </Button>
+          <Button
+            as="a"
+            href={profile.links.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            variant="ghost"
+            size="sm"
+            className="!p-0 min-w-0"
+            aria-label="GitHub"
+          >
             GitHub
-          </a>
+          </Button>
         </div>
       </div>
     </footer>

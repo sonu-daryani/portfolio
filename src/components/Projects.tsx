@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination } from 'swiper/modules'
 import type { Profile } from '../types/profile'
 import Card from './ui/Card'
+import Button from './ui/Button'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
@@ -40,7 +41,7 @@ export default function Projects({ profile }: ProjectsProps) {
             clickable: true,
             el: '.projects-pagination',
           }}
-          className="projects-swiper !overflow-visible h-[300px] sm:h-[320px] md:h-[340px]"
+          className="projects-swiper h-[300px] sm:h-[320px] md:h-[340px]"
         >
           {profile.projects.map((project) => (
             <SwiperSlide key={project.name}>
@@ -76,29 +77,29 @@ export default function Projects({ profile }: ProjectsProps) {
           ))}
         </Swiper>
         <div className="flex items-center justify-center gap-4 mt-6">
-          <Card
-            as="button"
-            className="projects-prev w-12 h-12 flex items-center justify-center text-theme hover:border-accent hover:text-accent disabled:opacity-40"
-            padding="none"
-            interactive
+          <Button
+            variant="secondary"
+            size="icon"
+            liquid
+            className="projects-prev text-theme hover:text-accent disabled:opacity-40"
             aria-label="Previous"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-          </Card>
+          </Button>
           <div className="projects-pagination flex gap-1" />
-          <Card
-            as="button"
-            className="projects-next w-12 h-12 flex items-center justify-center text-theme hover:border-accent hover:text-accent disabled:opacity-40"
-            padding="none"
-            interactive
+          <Button
+            variant="secondary"
+            size="icon"
+            liquid
+            className="projects-next text-theme hover:text-accent disabled:opacity-40"
             aria-label="Next"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
-          </Card>
+          </Button>
         </div>
         <Card
           as="div"

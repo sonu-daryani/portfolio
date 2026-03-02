@@ -35,12 +35,10 @@ const paddingMap = {
 }
 
 const baseClasses =
-  'relative overflow-hidden rounded-2xl bg-theme-card/80 backdrop-blur-xl transition-all duration-300 ease-out' +
-  ' shadow-[0_4px_20px_-4px_rgba(0,0,0,0.5),0_8px_32px_-8px_rgba(0,0,0,0.4)]'
+  'relative overflow-hidden rounded-2xl bg-theme-card/80 backdrop-blur-xl transition-all duration-300 ease-out card-shadow'
 
 const interactiveClasses =
-  'hover:bg-theme-card/95' +
-  ' hover:shadow-[0_20px_50px_-16px_rgba(0,0,0,0.6),0_0_48px_-12px_rgba(167,139,250,0.25)]'
+  'hover:bg-theme-card/95 card-shadow-hover'
 
 const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
   {

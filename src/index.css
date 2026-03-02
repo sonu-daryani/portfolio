@@ -70,6 +70,66 @@ html.light body {
   background: var(--theme-bg-canvas, #030306);
 }
 
+/* Card shadows – global so production build is consistent */
+.card-shadow {
+  box-shadow: 0 4px 20px -4px rgba(0,0,0,0.5), 0 8px 32px -8px rgba(0,0,0,0.4);
+}
+.card-shadow-hover:hover {
+  box-shadow: 0 20px 50px -16px rgba(0,0,0,0.6), 0 0 48px -12px rgba(167,139,250,0.25);
+}
+
+/* Button liquid background – deep purple, glossy, no border */
+.btn-liquid {
+  background: linear-gradient(
+    145deg,
+    rgba(109, 73, 199, 0.35) 0%,
+    rgba(47, 26, 81, 0.95) 35%,
+    rgba(35, 18, 58, 0.98) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 0 rgba(129, 120, 201, 0.25),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.2),
+    0 8px 24px -8px rgba(47, 26, 81, 0.5);
+}
+.btn-liquid:hover {
+  background: linear-gradient(
+    145deg,
+    rgba(109, 73, 199, 0.45) 0%,
+    rgba(55, 30, 95, 0.95) 35%,
+    rgba(42, 22, 70, 0.98) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 0 rgba(129, 120, 201, 0.35),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.15),
+    0 12px 32px -8px rgba(109, 73, 199, 0.35);
+}
+
+/* Button primary – liquid + accent glow */
+.btn-primary {
+  background: linear-gradient(
+    145deg,
+    rgba(167, 139, 250, 0.4) 0%,
+    rgba(124, 58, 237, 0.95) 40%,
+    rgba(47, 26, 81, 0.98) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.12),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.25),
+    0 10px 28px -6px rgba(124, 58, 237, 0.4);
+}
+.btn-primary:hover {
+  background: linear-gradient(
+    145deg,
+    rgba(196, 181, 253, 0.5) 0%,
+    rgba(139, 92, 246, 0.95) 40%,
+    rgba(67, 36, 110, 0.98) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.18),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.2),
+    0 16px 40px -8px rgba(124, 58, 237, 0.5);
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -117,28 +177,22 @@ html.light body {
   height: 100%;
 }
 
-/* Swiper – active card bigger, hover makes card bigger */
+/* Swiper – active slide highlighted with shadow only (no scale = no distortion) */
 .projects-swiper .swiper-slide > a,
 .projects-swiper .swiper-slide > article,
 .experience-swiper .swiper-slide > a,
 .experience-swiper .swiper-slide > article {
-  transition: transform 0.25s ease;
+  transition: box-shadow 0.25s ease, background 0.25s ease;
 }
 .projects-swiper .swiper-slide-active > a,
 .projects-swiper .swiper-slide-active > article,
 .experience-swiper .swiper-slide-active > a,
 .experience-swiper .swiper-slide-active > article {
-  transform: scale(1.06) !important;
+  box-shadow: 0 20px 50px -16px rgba(0,0,0,0.6), 0 0 48px -12px rgba(167,139,250,0.25);
 }
 .projects-swiper .swiper-slide > a:hover,
 .projects-swiper .swiper-slide > article:hover,
 .experience-swiper .swiper-slide > a:hover,
 .experience-swiper .swiper-slide > article:hover {
-  transform: scale(1.06) !important;
-}
-.projects-swiper .swiper-slide-active > a:hover,
-.projects-swiper .swiper-slide-active > article:hover,
-.experience-swiper .swiper-slide-active > a:hover,
-.experience-swiper .swiper-slide-active > article:hover {
-  transform: scale(1.1) !important;
+  box-shadow: 0 20px 50px -16px rgba(0,0,0,0.6), 0 0 48px -12px rgba(167,139,250,0.25);
 }

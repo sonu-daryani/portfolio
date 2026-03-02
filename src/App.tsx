@@ -11,6 +11,7 @@ import Experience from './components/Experience'
 import Projects from './components/Projects'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import Button from './components/ui/Button'
 
 export type SectionId = 'home' | 'about' | 'experience' | 'projects' | 'contact'
 
@@ -138,14 +139,16 @@ export default function App() {
               onClick={(e) => e.stopPropagation()}
             >
               {SECTIONS.map(({ id, label }) => (
-                <button
-                  type="button"
+                <Button
                   key={id}
+                  variant="ghost"
+                  size="lg"
+                  liquid
+                  className="text-2xl font-semibold !py-3 !px-6"
                   onClick={() => goTo(id)}
-                  className="text-2xl font-semibold text-theme hover:text-accent py-3 px-6 rounded-2xl hover:bg-theme-card transition-all"
                 >
                   {label}
-                </button>
+                </Button>
               ))}
             </motion.nav>
           </motion.div>

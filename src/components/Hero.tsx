@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import type { Profile } from '../types/profile'
+import Button from './ui/Button'
 
 interface HeroProps {
   profile: Profile
@@ -142,7 +143,7 @@ export default function Hero({ profile, onNavigateContact }: HeroProps) {
             </motion.p>
 
             <motion.div
-              className="flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-4"
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4"
               variants={{
                 hidden: { opacity: 0, y: 16 },
                 visible: {
@@ -156,17 +157,17 @@ export default function Hero({ profile, onNavigateContact }: HeroProps) {
                 {
                   label: 'Get in touch',
                   onClick: true,
-                  primary: true,
+                  variant: 'primary' as const,
                 },
                 {
                   label: 'GitHub',
                   href: profile.links.github,
-                  primary: false,
+                  variant: 'secondary' as const,
                 },
                 {
                   label: 'LinkedIn',
                   href: profile.links.linkedin,
-                  primary: false,
+                  variant: 'secondary' as const,
                 },
               ].map((item) => (
                 <motion.div
@@ -178,57 +179,26 @@ export default function Hero({ profile, onNavigateContact }: HeroProps) {
                   style={{ transform: 'translateZ(8px)' }}
                 >
                   {item.onClick ? (
-                    <motion.button
-                      type="button"
+                    <Button
+                      variant={item.variant}
+                      size="lg"
+                      liquid
                       onClick={onNavigateContact}
-                      className="px-5 py-3 sm:px-6 sm:py-3.5 rounded-2xl font-semibold text-sm sm:text-base select-none touch-manipulation"
-                      style={{
-                        background: item.primary
-                          ? 'linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%)'
-                          : undefined,
-                        color: item.primary ? 'var(--theme-on-accent)' : undefined,
-                        boxShadow: item.primary
-                          ? '0 10px 25px -5px rgba(124, 58, 237, 0.35), 0 0 0 1px rgba(255,255,255,0.1) inset'
-                          : undefined,
-                        border: item.primary ? 'none' : '1px solid var(--theme-border)',
-                        backgroundColor: item.primary ? undefined : 'var(--theme-card)',
-                      }}
-                      whileHover={{
-                        scale: 1.05,
-                        rotateY: 2,
-                        rotateX: -2,
-                        boxShadow: item.primary
-                          ? '0 20px 40px -10px rgba(124, 58, 237, 0.45)'
-                          : '0 12px 24px -8px rgba(0,0,0,0.2)',
-                        transition: { duration: 0.2 },
-                      }}
-                      whileTap={{
-                        scale: 0.98,
-                        transition: { duration: 0.1 },
-                      }}
                     >
                       {item.label}
-                    </motion.button>
+                    </Button>
                   ) : (
-                    <motion.a
+                    <Button
+                      as="a"
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-block px-5 py-3 sm:px-6 sm:py-3.5 rounded-2xl font-semibold text-sm sm:text-base border border-theme-border bg-theme-card/80 backdrop-blur-sm text-theme hover:border-accent/50 hover:text-accent select-none touch-manipulation"
-                      whileHover={{
-                        scale: 1.05,
-                        rotateY: 2,
-                        rotateX: -2,
-                        boxShadow: '0 12px 24px -8px rgba(0,0,0,0.2)',
-                        transition: { duration: 0.2 },
-                      }}
-                      whileTap={{
-                        scale: 0.98,
-                        transition: { duration: 0.1 },
-                      }}
+                      variant={item.variant}
+                      size="lg"
+                      liquid
                     >
                       {item.label}
-                    </motion.a>
+                    </Button>
                   )}
                 </motion.div>
               ))}
