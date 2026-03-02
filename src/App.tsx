@@ -35,10 +35,11 @@ export default function App() {
 
   return (
     <>
-      <div className={`fixed inset-0 z-0 canvas-bg ${theme === 'light' ? 'canvas-bg-light' : ''}`}>
+      <div className={`fixed inset-0 z-0 canvas-bg ${theme === 'light' ? 'canvas-bg-light' : 'canvas-bg-dark'}`}>
         <Canvas
+          key={theme}
           camera={{ position: [0, 0, 6], fov: 50 }}
-          gl={{ alpha: true, antialias: true }}
+          gl={{ alpha: false, antialias: true }}
           dpr={[1, 2]}
         >
           <Scene3D theme={theme} />

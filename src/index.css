@@ -74,15 +74,18 @@ html.light body {
   overscroll-behavior-y: contain;
 }
 
-/* Canvas wrapper – matches theme */
-.canvas-bg {
-  background: var(--theme-bg-canvas, #030306);
+/* Canvas wrapper – theme-specific so switch is instant (no stale bg) */
+.canvas-bg-light {
+  background: #ffffff;
 }
-
-/* Light theme – canvas must be white (no purple) */
-html.light .canvas-bg,
-.canvas-bg.canvas-bg-light {
+.canvas-bg-dark {
+  background: #000000;
+}
+html.light .canvas-bg-light {
   background: #ffffff !important;
+}
+html.dark .canvas-bg-dark {
+  background: #000000 !important;
 }
 
 /* Card shadows – global so production build is consistent */
@@ -249,6 +252,12 @@ html.light ::selection {
 .projects-swiper.projects-swiper .swiper-wrapper,
 .projects-swiper.projects-swiper .swiper-slide {
   height: 100%;
+}
+
+/* Projects swiper – card shadows not clipped (padding is on the Swiper element in JSX) */
+.projects-swiper .swiper-slide > a,
+.projects-swiper .swiper-slide > article {
+  overflow: visible;
 }
 .experience-swiper.experience-swiper .swiper-wrapper,
 .experience-swiper.experience-swiper .swiper-slide {

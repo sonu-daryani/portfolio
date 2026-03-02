@@ -24,8 +24,8 @@ export default function Scene3D({ theme }: Scene3DProps) {
       gl.setClearColor(0xffffff, 1)
       scene.fog = null
     } else {
-      scene.background = null
-      gl.setClearColor(0x030306, 1)
+      scene.background = new THREE.Color(0x000000)
+      gl.setClearColor(0x000000, 1)
       scene.fog = null
     }
   }, [isDay, scene, gl])

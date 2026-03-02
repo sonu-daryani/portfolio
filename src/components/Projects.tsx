@@ -26,12 +26,12 @@ export default function Projects({ profile }: ProjectsProps) {
         </motion.h2>
         <Swiper
           modules={[Navigation, Pagination]}
-          spaceBetween={24}
+          spaceBetween={32}
           slidesPerView={1}
           breakpoints={{
-            640: { slidesPerView: 1 },
-            768: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
+            640: { slidesPerView: 1, spaceBetween: 32 },
+            768: { slidesPerView: 2, spaceBetween: 32 },
+            1024: { slidesPerView: 3, spaceBetween: 40 },
           }}
           navigation={{
             prevEl: '.projects-prev',
@@ -41,7 +41,7 @@ export default function Projects({ profile }: ProjectsProps) {
             clickable: true,
             el: '.projects-pagination',
           }}
-          className="projects-swiper h-[300px] sm:h-[320px] md:h-[340px]"
+          className="projects-swiper h-[320px] sm:h-[340px] md:h-[360px] py-6 px-4 sm:px-6 md:px-8"
         >
           {profile.projects.map((project) => (
             <SwiperSlide key={project.name}>
