@@ -39,7 +39,7 @@ export const profile: Profile = {
       ],
     },
     {
-      role: 'Software Engineer – Full Stack',
+      role: 'Software Engineer',
       company: 'Crownstack Technologies Pvt. Ltd.',
       period: "Feb '24 – Jan '26",
       location: 'Onsite',
