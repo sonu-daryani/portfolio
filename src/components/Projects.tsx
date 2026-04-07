@@ -61,7 +61,7 @@ export default function Projects({ profile }: ProjectsProps) {
                   <img
                     src={project.previewImage}
                     alt={`${project.name} preview`}
-                    className="w-full h-44 sm:h-48 object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                    className="w-full aspect-[16/9] object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                     loading="lazy"
                   />
                 </div>
@@ -160,7 +160,7 @@ export default function Projects({ profile }: ProjectsProps) {
               <img
                 src={selectedProject.previewImage}
                 alt={`${selectedProject.name} preview`}
-                className="w-full h-52 sm:h-64 object-cover"
+                className="w-full aspect-[16/9] object-cover"
               />
             </div>
             <div className="flex items-start justify-between gap-4">
