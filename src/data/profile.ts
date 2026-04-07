@@ -11,7 +11,7 @@ export const profile: Profile = {
   about: `Senior Front-end & Full Stack Engineer with nearly 4 years of experience specializing in Next.js, TypeScript, and NestJS API integrations across AI-powered and data-intensive platforms. Currently serving as Frontend Lead at IntalentAI, managing junior engineers while owning end-to-end UI architecture, delivery timelines, and cross-team collaboration. Proven expertise in building multi-tenant, scalable SaaS applications with complex data flows including scheduling systems, dynamic pricing engines, search filtering, and validation pipelines.`,
   links: {
     linkedin: 'https://www.linkedin.com/in/sonu-daryani-248a18202/',
-    github: 'https://github.com/sonu7524',
+    github: 'https://github.com/sonu-daryani',
     intalent: 'https://intalent.ai/',
     unlocklife: 'https://www.unlocklife.today/',
     winity: 'https://winity.life',
