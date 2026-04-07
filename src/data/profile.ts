@@ -104,7 +104,7 @@ export const profile: Profile = {
         'LX Medical is a healthcare-oriented product where I focused on building responsive, patient-friendly interfaces and robust internal workflows for data-heavy operations. I implemented modular frontend components, optimized form and table interactions, and ensured reliable API-driven states for day-to-day clinical/business operations. The architecture prioritized performance, maintainability, and clear UX for both operational and administrative users.',
       tech: ['React', 'TypeScript', 'TailwindCSS'],
       link: 'https://lx-medical.com/',
-      date: '2024',
+      date: 'Mar 2024',
       previewImage: 'https://s.wordpress.com/mshots/v1/https%3A%2F%2Flx-medical.com%2F?w=1200',
     },
     {
@@ -114,7 +114,7 @@ export const profile: Profile = {
         'Wearo Ecommerce is a modern storefront project where I implemented the core buyer journey from product discovery to checkout-ready flows. The focus was on visual polish, fast page rendering, intuitive filtering/browsing interactions, and mobile-first responsiveness. I also structured reusable UI blocks to support quick catalog updates and consistent branding while keeping the shopping experience smooth and conversion-friendly.',
       tech: ['Next.js', 'TypeScript', 'React', 'TailwindCSS'],
       link: 'https://wearo-ecommerce.vercel.app',
-      date: '2024',
+      date: 'Apr 2026',
       previewImage: 'https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwearo-ecommerce.vercel.app%2F?w=1200',
     },
   ],
