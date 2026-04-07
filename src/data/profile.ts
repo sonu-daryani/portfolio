@@ -2,7 +2,7 @@ import type { Profile } from '../types/profile'
 
 export const profile: Profile = {
   name: 'Sonu Daryani',
-  title: 'Full Stack Developer | Senior Front-end Engineer',
+  title: 'Full Stack Developer | Senior Front-end Engineer | Senior Software Developer',
   tagline: 'Building scalable, AI-enabled web platforms with strong UI/UX precision',
   image: '/profile.jpeg',
   email: 'sonudaryani135@gmail.com',
