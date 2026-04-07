@@ -10,6 +10,8 @@ A 3D animated portfolio built with **Vite**, **React**, **TypeScript**, **Three.
 - Sections: Hero, About, Experience, Projects, Contact
 - Links to LinkedIn, GitHub, IntalentAI, UnlockLife, winity.life
 
+<img width="1378" height="989" alt="Screenshot 2026-04-07 at 5 51 40 PM" src="https://github.com/user-attachments/assets/5ff57ebc-943f-40c1-959e-9fd96c4c8aab" />
+
 ## Setup
 
 ```bash
