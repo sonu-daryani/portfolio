@@ -20,14 +20,18 @@ export interface ExperienceItem {
   period: string
   location: string
   points: string[]
+  website?: string
+  previewImage?: string
 }
 
 export interface ProjectItem {
   name: string
   description: string
+  detailedDescription?: string
   tech: string[]
   link: string
   date: string
+  previewImage: string
 }
 
 export interface Education {

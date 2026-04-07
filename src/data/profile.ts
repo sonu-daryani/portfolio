@@ -29,6 +29,8 @@ export const profile: Profile = {
       company: 'IntalentAI',
       period: "Jan '26 – Present",
       location: 'Remote',
+      website: 'https://intalent.ai/',
+      previewImage: 'https://s.wordpress.com/mshots/v1/https%3A%2F%2Fintalent.ai%2F?w=1200',
       points: [
         'Leading UI architecture for AI-powered recruitment platform; managing 2 junior frontend engineers.',
         'Designed scalable multi-tenant Next.js architecture with pixel-perfect UI and high-performance rendering.',
@@ -41,6 +43,8 @@ export const profile: Profile = {
       company: 'Crownstack Technologies Pvt. Ltd.',
       period: "Feb '24 – Jan '26",
       location: 'Onsite',
+      website: 'https://crownstack.com/',
+      previewImage: 'https://s.wordpress.com/mshots/v1/https%3A%2F%2Fcrownstack.com%2F?w=1200',
       points: [
         'Built and maintained Next.js applications integrated with NestJS microservices.',
         'Developed faceted filtering search, scheduling modules, and workflow-based dashboards.',
@@ -53,6 +57,8 @@ export const profile: Profile = {
       company: 'Deepneura Technologies LLP',
       period: "Jan '23 – Feb '24",
       location: 'Remote',
+      website: 'https://deepneura.com/',
+      previewImage: 'https://s.wordpress.com/mshots/v1/https%3A%2F%2Fdeepneura.com%2F?w=1200',
       points: [
         'Designed React & Angular interfaces for AI-driven business applications.',
         'Integrated APIs and database services for secure, efficient data handling.',
@@ -64,37 +70,52 @@ export const profile: Profile = {
     {
       name: 'Intalent AI',
       description: 'Full-stack AI-powered recruitment system with resume parsing, job application processing, RBAC, Microsoft Graph & Azure Queue integrations. PostgreSQL JSONB search and faceted filtering.',
+      detailedDescription:
+        'Intalent AI is a multi-tenant recruitment platform where I led end-to-end frontend architecture for high-scale recruiter and candidate workflows. I built advanced resume parsing and validation journeys, faceted search with PostgreSQL JSONB, role-based dashboards, and scheduling/pricing modules with strong UX consistency. The project also included deep integration with Microsoft Graph, Azure Queue, and internal automation pipelines to reduce manual operations and improve hiring throughput.',
       tech: ['Next.js', 'TypeScript', 'NestJS', 'PostgreSQL', 'Prisma', 'Azure'],
       link: 'https://intalent.ai/',
       date: 'Jun 2025',
+      previewImage: 'https://s.wordpress.com/mshots/v1/https%3A%2F%2Fintalent.ai%2F?w=1200',
     },
     {
       name: 'Winity.life',
       description: 'NestJS APIs for wallet creation, blockchain transactions, multi-chain (Ethereum, Tron, Solana, BSC, Polygon). Sumsub KYC/AML, Reap payments, React Native & React admin.',
-      tech: ['NestJS', 'React Native', 'React', 'Blockchain'],
+      detailedDescription:
+        'Winity.life is a fintech + blockchain platform where I contributed to secure wallet and transaction flows across Ethereum, Tron, Solana, BSC, and Polygon networks. I worked on backend APIs and admin/client interfaces to support wallet lifecycle management, transaction visibility, and compliance checks. Integrations with Sumsub KYC/AML and Reap payment services were designed to keep onboarding and payments reliable while maintaining strict audit and verification requirements.',
+      tech: ['NestJS', 'React Native', 'React', 'Zustand', 'Blockchain'],
       link: 'https://winity.life',
       date: 'Sep 2025',
+      previewImage: 'https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwinity.life%2F?w=1200',
     },
     {
       name: 'UnlockLife',
       description: 'Scheduling-intensive digital community platform with event calendar, registration workflows, Redux state management, MUI & Tailwind component libraries.',
+      detailedDescription:
+        'UnlockLife is a community-driven platform focused on events, sessions, and member engagement. I developed scheduling-heavy flows including calendar views, registration pipelines, and status-driven user journeys with predictable state handling through Redux. The UI system was built with MUI + Tailwind to ensure reusable design patterns, fast iteration, and a clean responsive experience across desktop and mobile devices.',
       tech: ['Next.js', 'TypeScript', 'Redux', 'MUI', 'TailwindCSS'],
       link: 'https://www.unlocklife.today/',
       date: 'Mar 2024',
+      previewImage: 'https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.unlocklife.today%2F?w=1200',
     },
     {
       name: 'LX Medical',
       description: 'Healthcare-focused web platform with responsive interfaces, structured data workflows, and scalable front-end architecture.',
-      tech: ['Next.js', 'TypeScript', 'React', 'TailwindCSS'],
-      link: 'https://lxmedical.com/',
+      detailedDescription:
+        'LX Medical is a healthcare-oriented product where I focused on building responsive, patient-friendly interfaces and robust internal workflows for data-heavy operations. I implemented modular frontend components, optimized form and table interactions, and ensured reliable API-driven states for day-to-day clinical/business operations. The architecture prioritized performance, maintainability, and clear UX for both operational and administrative users.',
+      tech: ['React', 'TypeScript', 'TailwindCSS'],
+      link: 'https://lx-medical.com/',
       date: '2024',
+      previewImage: 'https://s.wordpress.com/mshots/v1/https%3A%2F%2Flx-medical.com%2F?w=1200',
     },
     {
       name: 'Wearo Ecommerce',
       description: 'Modern e-commerce storefront with product browsing, responsive UI, and streamlined shopping experience.',
+      detailedDescription:
+        'Wearo Ecommerce is a modern storefront project where I implemented the core buyer journey from product discovery to checkout-ready flows. The focus was on visual polish, fast page rendering, intuitive filtering/browsing interactions, and mobile-first responsiveness. I also structured reusable UI blocks to support quick catalog updates and consistent branding while keeping the shopping experience smooth and conversion-friendly.',
       tech: ['Next.js', 'TypeScript', 'React', 'TailwindCSS'],
       link: 'https://wearo-ecommerce.vercel.app',
       date: '2024',
+      previewImage: 'https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwearo-ecommerce.vercel.app%2F?w=1200',
     },
   ],
   achievements: [

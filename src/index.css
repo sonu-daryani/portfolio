@@ -345,3 +345,20 @@ html.light .project-tech-tag {
 .experience-swiper .swiper-slide > article {
   transition: background 0.25s ease;
 }
+
+/* Modal - theme-aware surface and overlay contrast */
+.modal-surface {
+  background: linear-gradient(160deg, var(--theme-card) 0%, rgba(255, 255, 255, 0.03) 100%);
+  border: 1px solid var(--theme-border);
+  box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.55), 0 8px 24px -12px rgba(0, 0, 0, 0.4);
+}
+
+html.light .modal-overlay > div:first-child {
+  background: rgba(15, 23, 42, 0.25);
+}
+
+html.light .modal-surface {
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  box-shadow: 0 20px 48px -24px rgba(15, 23, 42, 0.35), 0 8px 20px -14px rgba(15, 23, 42, 0.25);
+}

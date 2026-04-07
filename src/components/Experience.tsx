@@ -36,7 +36,7 @@ export default function Experience({ profile }: ExperienceProps) {
             clickable: true,
             el: '.experience-pagination',
           }}
-          className="experience-swiper h-[380px] sm:h-[400px] md:h-[420px]"
+          className="experience-swiper h-[500px] sm:h-[540px] md:h-[560px]"
         >
           {profile.experience.map((job) => (
             <SwiperSlide key={job.company}>
@@ -47,6 +47,16 @@ export default function Experience({ profile }: ExperienceProps) {
                 liquid
                 className="h-full min-h-0 flex flex-col"
               >
+                {job.previewImage ? (
+                  <div className="mb-4 overflow-hidden rounded-xl border border-theme/10 bg-theme-strong/10">
+                    <img
+                      src={job.previewImage}
+                      alt={`${job.company} website preview`}
+                      className="w-full h-52 sm:h-56 object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                ) : null}
                 <div className="flex flex-wrap items-baseline justify-between gap-2 mb-4">
                   <h3 className="text-xl font-semibold text-theme">{job.role}</h3>
                   <span className="text-theme-muted text-sm font-mono">{job.period}</span>
@@ -62,6 +72,21 @@ export default function Experience({ profile }: ExperienceProps) {
                     </li>
                   ))}
                 </ul>
+                {job.website ? (
+                  <div className="pt-4">
+                    <Button
+                      as="a"
+                      href={job.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      variant="secondary"
+                      size="sm"
+                      liquid
+                    >
+                      Visit Website
+                    </Button>
+                  </div>
+                ) : null}
               </Card>
             </SwiperSlide>
           ))}

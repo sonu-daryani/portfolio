@@ -1,9 +1,11 @@
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination } from 'swiper/modules'
 import type { Profile } from '../types/profile'
 import Card from './ui/Card'
 import Button from './ui/Button'
+import Modal from './ui/Modal'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
@@ -13,6 +15,8 @@ interface ProjectsProps {
 }
 
 export default function Projects({ profile }: ProjectsProps) {
+  const [selectedProject, setSelectedProject] = useState<Profile['projects'][number] | null>(null)
+
   return (
     <section className="min-h-[calc(100vh-8rem)] flex flex-col justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24 py-12 sm:py-16 md:py-20 lg:py-24">
       <div className="max-w-5xl mx-auto w-full min-w-0">
@@ -30,8 +34,8 @@ export default function Projects({ profile }: ProjectsProps) {
           slidesPerView={1}
           breakpoints={{
             640: { slidesPerView: 1, spaceBetween: 32 },
-            768: { slidesPerView: 2, spaceBetween: 32 },
-            1024: { slidesPerView: 3, spaceBetween: 40 },
+            900: { slidesPerView: 2, spaceBetween: 36 },
+            1280: { slidesPerView: 2, spaceBetween: 40 },
           }}
           navigation={{
             prevEl: '.projects-prev',
@@ -41,37 +45,50 @@ export default function Projects({ profile }: ProjectsProps) {
             clickable: true,
             el: '.projects-pagination',
           }}
-          className="projects-swiper h-[380px] sm:h-[400px] md:h-[420px] py-6 px-4 sm:px-6 md:px-8"
+          className="projects-swiper h-[500px] sm:h-[540px] md:h-[560px] py-6 px-4 sm:px-6 md:px-8"
         >
-          {profile.projects.map((project) => {
-            const previewUrl = `https://image.thum.io/get/width/900/noanimate/${encodeURIComponent(project.link)}`
-            return (
+          {profile.projects.map((project) => (
             <SwiperSlide key={project.name}>
               <Card
-                as="a"
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
+                as="button"
                 padding="lg"
                 interactive
                 liquid
-                className="block group h-full min-h-0 flex flex-col"
+                className="block w-full text-left group h-full min-h-0 flex flex-col"
+                onClick={() => setSelectedProject(project)}
               >
-                <div className="w-full h-32 rounded-xl overflow-hidden border border-white/10 mb-3 bg-black/20">
+                <div className="mb-4 overflow-hidden rounded-xl border border-theme/10 bg-theme-strong/10">
                   <img
-                    src={previewUrl}
+                    src={project.previewImage}
                     alt={`${project.name} preview`}
+                    className="w-full h-44 sm:h-48 object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                     loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
                   />
                 </div>
                 <span className="text-accent font-mono text-xs">{project.date}</span>
                 <h3 className="text-lg font-semibold text-theme mt-2 mb-3 group-hover:text-accent transition-colors">
                   {project.name}
                 </h3>
-                <p className="text-theme-muted text-sm leading-relaxed mb-4 flex-1 line-clamp-4">
-                  {project.description}
-                </p>
+                <details
+                  className="mb-4 rounded-lg border border-theme/10 bg-theme-strong/5 px-3 py-2 group/details"
+                  onClick={(event) => event.stopPropagation()}
+                >
+                  <summary className="cursor-pointer text-sm text-theme-muted list-none flex items-center justify-between gap-3">
+                    <span>Description</span>
+                    <svg
+                      className="w-4 h-4 text-accent transition-transform group-open/details:rotate-180"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </summary>
+                  <p className="text-theme-muted text-sm leading-relaxed mt-2 line-clamp-2 group-open/details:line-clamp-none">
+                    {project.detailedDescription ?? project.description}
+                  </p>
+                </details>
                 <div className="flex flex-wrap gap-2">
                   {project.tech.map((t) => (
                     <span
@@ -82,10 +99,10 @@ export default function Projects({ profile }: ProjectsProps) {
                     </span>
                   ))}
                 </div>
+                <span className="text-xs text-theme-muted mt-4">Click to expand</span>
               </Card>
             </SwiperSlide>
-            )
-          })}
+          ))}
         </Swiper>
         <div className="flex items-center justify-center gap-4 mt-6">
           <Button
@@ -132,6 +149,84 @@ export default function Projects({ profile }: ProjectsProps) {
           </ul>
         </Card>
       </div>
+      <Modal
+        isOpen={!!selectedProject}
+        onClose={() => setSelectedProject(null)}
+        title={selectedProject?.name}
+      >
+        {selectedProject ? (
+          <div className="space-y-4">
+            <div className="overflow-hidden rounded-xl border border-theme/10 bg-theme-strong/10">
+              <img
+                src={selectedProject.previewImage}
+                alt={`${selectedProject.name} preview`}
+                className="w-full h-52 sm:h-64 object-cover"
+              />
+            </div>
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="text-accent text-xs font-mono">{selectedProject.date}</p>
+                <h3 className="text-xl sm:text-2xl font-semibold text-theme mt-1">
+                  {selectedProject.name}
+                </h3>
+              </div>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-theme-muted hover:text-theme"
+                aria-label="Close project details"
+                onClick={() => setSelectedProject(null)}
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </Button>
+            </div>
+
+            <details className="rounded-xl border border-theme/10 bg-theme-strong/5 px-4 py-3 group/details" open>
+              <summary className="cursor-pointer text-sm font-medium text-theme list-none flex items-center justify-between gap-3">
+                <span>Project Description</span>
+                <svg
+                  className="w-4 h-4 text-accent transition-transform group-open/details:rotate-180"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <p className="text-theme-muted leading-relaxed mt-3 line-clamp-2 group-open/details:line-clamp-none">
+                {selectedProject.detailedDescription ?? selectedProject.description}
+              </p>
+            </details>
+
+            <div className="flex flex-wrap gap-2">
+              {selectedProject.tech.map((tech) => (
+                <span
+                  key={tech}
+                  className="project-tech-tag px-2.5 py-1 rounded-xl bg-accent/15 text-accent-light text-xs font-mono"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+
+            <div className="pt-2">
+              <Button
+                as="a"
+                href={selectedProject.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="secondary"
+                liquid
+              >
+                Visit Project
+              </Button>
+            </div>
+          </div>
+        ) : null}
+      </Modal>
     </section>
   )
 }
