@@ -52,7 +52,7 @@ export default function Experience({ profile }: ExperienceProps) {
                     <img
                       src={job.previewImage}
                       alt={`${job.company} website preview`}
-                      className="w-full h-60 sm:h-56 md:h-60 object-cover"
+                      className="w-full aspect-[16/9] object-cover"
                       loading="lazy"
                       referrerPolicy="no-referrer"
                     />
