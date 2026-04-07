@@ -36,7 +36,7 @@ export default function Experience({ profile }: ExperienceProps) {
             clickable: true,
             el: '.experience-pagination',
           }}
-          className="experience-swiper h-[500px] sm:h-[540px] md:h-[560px]"
+          className="experience-swiper h-[620px] sm:h-[560px] md:h-[580px]"
         >
           {profile.experience.map((job) => (
             <SwiperSlide key={job.company}>
@@ -52,8 +52,9 @@ export default function Experience({ profile }: ExperienceProps) {
                     <img
                       src={job.previewImage}
                       alt={`${job.company} website preview`}
-                      className="w-full h-52 sm:h-56 object-cover"
+                      className="w-full h-60 sm:h-56 md:h-60 object-cover"
                       loading="lazy"
+                      referrerPolicy="no-referrer"
                     />
                   </div>
                 ) : null}
