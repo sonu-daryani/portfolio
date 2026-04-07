@@ -353,6 +353,25 @@ html.light .project-tech-tag {
   box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.55), 0 8px 24px -12px rgba(0, 0, 0, 0.4);
 }
 
+/* Typed title cursor */
+.typed-cursor {
+  display: inline-block;
+  margin-left: 2px;
+  color: var(--theme-text);
+  animation: typed-blink 0.8s infinite;
+}
+
+@keyframes typed-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
 html.light .modal-overlay > div:first-child {
   background: rgba(15, 23, 42, 0.25);
 }

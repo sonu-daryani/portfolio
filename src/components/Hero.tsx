@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import type { Profile } from '../types/profile'
 import Button from './ui/Button'
@@ -13,11 +13,62 @@ const duration = 0.5
 
 export default function Hero({ profile, onNavigateContact }: HeroProps) {
   const cardRef = useRef<HTMLDivElement>(null)
+  const [typedTitle, setTypedTitle] = useState('')
   const x = useMotionValue(0.5)
   const y = useMotionValue(0.5)
   const spring = { type: 'spring' as const, stiffness: 300, damping: 30 }
   const rotateX = useSpring(useTransform(y, [0, 1], [8, -8]), spring)
   const rotateY = useSpring(useTransform(x, [0, 1], [-8, 8]), spring)
+
+  useEffect(() => {
+    const titles = profile.title
+      .split('|')
+      .map((item) => item.trim())
+      .filter(Boolean)
+
+    const queue = titles.length ? titles : [profile.title]
+    let titleIndex = 0
+    let charIndex = 0
+    let deleting = false
+    let timeoutId: number | undefined
+
+    const tick = () => {
+      const current = queue[titleIndex]
+
+      if (!deleting) {
+        charIndex += 1
+        setTypedTitle(current.slice(0, charIndex))
+
+        if (charIndex === current.length) {
+          deleting = true
+          timeoutId = window.setTimeout(tick, 1400)
+          return
+        }
+
+        timeoutId = window.setTimeout(tick, 55)
+        return
+      }
+
+      charIndex -= 1
+      setTypedTitle(current.slice(0, Math.max(0, charIndex)))
+
+      if (charIndex === 0) {
+        deleting = false
+        titleIndex = (titleIndex + 1) % queue.length
+        timeoutId = window.setTimeout(tick, 300)
+        return
+      }
+
+      timeoutId = window.setTimeout(tick, 30)
+    }
+
+    timeoutId = window.setTimeout(tick, 350)
+    return () => {
+      if (timeoutId) {
+        window.clearTimeout(timeoutId)
+      }
+    }
+  }, [profile.title])
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return
@@ -130,7 +181,10 @@ export default function Hero({ profile, onNavigateContact }: HeroProps) {
                 visible: { opacity: 1, y: 0, transition: { duration } },
               }}
             >
-              {profile.title}
+              <span>{typedTitle}</span>
+              <span className="typed-cursor" aria-hidden>
+                |
+              </span>
             </motion.p>
             <motion.p
               className="text-theme-muted text-sm sm:text-base mb-8 sm:mb-10 md:mb-12 max-w-xl leading-relaxed"
