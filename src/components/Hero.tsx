@@ -169,6 +169,12 @@ export default function Hero({ profile, onNavigateContact }: HeroProps) {
                   href: profile.links.linkedin,
                   variant: 'secondary' as const,
                 },
+                {
+                  label: 'Download CV',
+                  href: '/sonu-daryani-cv.pdf',
+                  variant: 'secondary' as const,
+                  download: true,
+                },
               ].map((item) => (
                 <motion.div
                   key={item.label}
@@ -191,11 +197,12 @@ export default function Hero({ profile, onNavigateContact }: HeroProps) {
                     <Button
                       as="a"
                       href={item.href}
-                      target="_blank"
+                      target={item.download ? undefined : '_blank'}
                       rel="noopener noreferrer"
                       variant={item.variant}
                       size="lg"
                       liquid
+                      download={item.download ? 'Sonu_Daryani_CV.pdf' : undefined}
                     >
                       {item.label}
                     </Button>

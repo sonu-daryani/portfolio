@@ -12,6 +12,7 @@ export interface ButtonProps {
   liquid?: boolean
   as?: 'button' | 'a'
   href?: string
+  download?: boolean | string
   target?: string
   rel?: string
   type?: 'button' | 'submit'
@@ -50,6 +51,7 @@ const Button = forwardRef<HTMLButtonElement & HTMLAnchorElement, ButtonProps>(fu
     liquid = false,
     as: Component = 'button',
     href,
+    download,
     target,
     rel,
     type = 'button',
@@ -84,6 +86,7 @@ const Button = forwardRef<HTMLButtonElement & HTMLAnchorElement, ButtonProps>(fu
       <motion.a
         ref={ref as React.Ref<HTMLAnchorElement>}
         href={href}
+        download={download}
         target={target}
         rel={rel}
         onClick={onClick}

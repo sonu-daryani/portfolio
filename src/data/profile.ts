@@ -25,7 +25,7 @@ export const profile: Profile = {
   },
   experience: [
     {
-      role: 'Senior Front-end Engineer (Front-end Lead)',
+      role: 'Senior Software Developer',
       company: 'IntalentAI',
       period: "Jan '26 – Present",
       location: 'Remote',
