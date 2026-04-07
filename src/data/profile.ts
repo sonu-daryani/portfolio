@@ -82,6 +82,20 @@ export const profile: Profile = {
       link: 'https://www.unlocklife.today/',
       date: 'Mar 2024',
     },
+    {
+      name: 'LX Medical',
+      description: 'Healthcare-focused web platform with responsive interfaces, structured data workflows, and scalable front-end architecture.',
+      tech: ['Next.js', 'TypeScript', 'React', 'TailwindCSS'],
+      link: 'https://lxmedical.com/',
+      date: '2024',
+    },
+    {
+      name: 'Wearo Ecommerce',
+      description: 'Modern e-commerce storefront with product browsing, responsive UI, and streamlined shopping experience.',
+      tech: ['Next.js', 'TypeScript', 'React', 'TailwindCSS'],
+      link: 'https://wearo-ecommerce.vercel.app',
+      date: '2024',
+    },
   ],
   achievements: [
     'Rockstar Rookie Award – Crownstack',
