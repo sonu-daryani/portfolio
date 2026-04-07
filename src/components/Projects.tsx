@@ -43,7 +43,9 @@ export default function Projects({ profile }: ProjectsProps) {
           }}
           className="projects-swiper h-[380px] sm:h-[400px] md:h-[420px] py-6 px-4 sm:px-6 md:px-8"
         >
-          {profile.projects.map((project) => (
+          {profile.projects.map((project) => {
+            const previewUrl = `https://image.thum.io/get/width/900/noanimate/${encodeURIComponent(project.link)}`
+            return (
             <SwiperSlide key={project.name}>
               <Card
                 as="a"
@@ -55,6 +57,14 @@ export default function Projects({ profile }: ProjectsProps) {
                 liquid
                 className="block group h-full min-h-0 flex flex-col"
               >
+                <div className="w-full h-32 rounded-xl overflow-hidden border border-white/10 mb-3 bg-black/20">
+                  <img
+                    src={previewUrl}
+                    alt={`${project.name} preview`}
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                  />
+                </div>
                 <span className="text-accent font-mono text-xs">{project.date}</span>
                 <h3 className="text-lg font-semibold text-theme mt-2 mb-3 group-hover:text-accent transition-colors">
                   {project.name}
@@ -74,7 +84,8 @@ export default function Projects({ profile }: ProjectsProps) {
                 </div>
               </Card>
             </SwiperSlide>
-          ))}
+            )
+          })}
         </Swiper>
         <div className="flex items-center justify-center gap-4 mt-6">
           <Button
