@@ -85,7 +85,7 @@ export default function Projects({ profile }: ProjectsProps) {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </summary>
-                  <p className="text-theme-muted text-sm leading-relaxed mt-2 line-clamp-2 group-open/details:line-clamp-none">
+                  <p className="text-theme-muted text-sm leading-relaxed mt-2 line-clamp-2 group-open/details:line-clamp-none group-open/details:max-h-32 group-open/details:overflow-y-auto pr-1">
                     {project.detailedDescription ?? project.description}
                   </p>
                 </details>
@@ -196,7 +196,7 @@ export default function Projects({ profile }: ProjectsProps) {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </summary>
-              <p className="text-theme-muted leading-relaxed mt-3 line-clamp-2 group-open/details:line-clamp-none">
+              <p className="text-theme-muted leading-relaxed mt-3 line-clamp-2 group-open/details:line-clamp-none group-open/details:max-h-44 group-open/details:overflow-y-auto pr-1">
                 {selectedProject.detailedDescription ?? selectedProject.description}
               </p>
             </details>
