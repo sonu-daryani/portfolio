@@ -24,7 +24,7 @@ export default function Nav({ menuOpen, setMenuOpen, sections }: NavProps) {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <nav className="nav-bar max-w-6xl mx-auto flex items-center justify-between rounded-xl sm:rounded-2xl py-2.5 px-3 sm:py-3 sm:px-5 bg-theme-strong/80 dark:bg-theme-strong/60 backdrop-blur-xl shadow-lg">
+      <nav className="nav-bar max-w-6xl mx-auto flex items-center justify-between rounded-xl sm:rounded-2xl py-2.5 px-3 sm:py-3 sm:px-5 bg-theme-strong/95 dark:bg-zinc-950/90 shadow-lg border border-theme-border/40">
         <Link
           href="/"
           aria-label="Home"

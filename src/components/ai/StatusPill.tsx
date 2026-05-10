@@ -22,7 +22,7 @@ export default function StatusPill({ label, tone = 'live', className }: StatusPi
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
       className={cn(
-        'status-pill inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-mono tracking-wide backdrop-blur-md',
+        'status-pill inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-mono tracking-wide bg-theme-card/90',
         toneClasses[tone],
         className,
       )}

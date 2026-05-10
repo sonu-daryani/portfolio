@@ -6,13 +6,13 @@ import { Icon } from './ui/Icon'
 
 export default function Footer() {
   return (
-    <footer className="site-footer border-t border-theme-border py-4 sm:py-5 px-4 sm:px-6 md:px-12 bg-theme-strong/30 backdrop-blur-sm flex-shrink-0">
+    <footer className="site-footer border-t border-theme-border py-4 sm:py-5 px-4 sm:px-6 md:px-12 bg-theme-strong/55 dark:bg-black/40 flex-shrink-0">
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
         <p className="text-theme-muted text-xs sm:text-sm font-mono">
           © {new Date().getFullYear()} {profile.name} — built with{' '}
           <span className="text-accent">Next.js</span> +{' '}
           <span className="text-accent">TypeScript</span> +{' '}
-          <span className="text-accent">Three.js</span>
+          <span className="text-accent">Framer Motion</span>
         </p>
         <div className="flex items-center gap-2">
           <Link

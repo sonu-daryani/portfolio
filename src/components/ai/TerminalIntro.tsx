@@ -28,7 +28,7 @@ export default function TerminalIntro({ lines, prompt = 'sonu@portfolio:~$' }: T
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.1 }}
-      className="terminal-card rounded-2xl border border-theme-border bg-theme-strong/70 backdrop-blur-xl p-4 sm:p-5 font-mono text-[13px] sm:text-sm shadow-xl overflow-hidden"
+      className="terminal-card rounded-2xl border border-theme-border bg-theme-strong/92 dark:bg-zinc-950/90 p-4 sm:p-5 font-mono text-[13px] sm:text-sm shadow-xl overflow-hidden"
     >
       <div className="flex items-center gap-1.5 pb-3 border-b border-theme-border">
         <span className="h-2.5 w-2.5 rounded-full bg-rose-400/80" />
@@ -54,11 +54,11 @@ export default function TerminalIntro({ lines, prompt = 'sonu@portfolio:~$' }: T
           </motion.div>
         ))}
         {step < lines.length ? (
-          <span className="inline-block w-2 h-4 bg-accent align-middle animate-pulse" />
+          <span className="inline-block w-2 h-4 bg-accent/90 align-middle" />
         ) : (
           <div className="flex gap-2">
             <span className="text-accent shrink-0">{prompt}</span>
-            <span className="inline-block w-2 h-4 bg-accent align-middle animate-pulse" />
+            <span className="inline-block w-2 h-4 bg-accent/90 align-middle" />
           </div>
         )}
       </div>

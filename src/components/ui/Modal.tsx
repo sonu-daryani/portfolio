@@ -42,7 +42,7 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
           exit={{ opacity: 0 }}
           onClick={onClose}
         >
-          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+          <div className="absolute inset-0 bg-black/75" />
           <motion.div
             role="dialog"
             aria-modal="true"

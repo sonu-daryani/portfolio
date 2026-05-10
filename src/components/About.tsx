@@ -86,7 +86,7 @@ export default function About({ profile }: AboutProps) {
               />
               <span className="hero-portrait-glow" aria-hidden />
             </div>
-            <div className="rounded-2xl border border-theme-border bg-theme-card/60 backdrop-blur-md p-4 space-y-2 text-sm">
+            <div className="rounded-2xl border border-theme-border bg-theme-card/85 p-4 space-y-2 text-sm">
               <p className="text-theme-muted font-mono text-[11px] uppercase tracking-[0.2em]">
                 Quick facts
               </p>
@@ -127,7 +127,7 @@ export default function About({ profile }: AboutProps) {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: i * 0.06 }}
-                      className="focus-card rounded-2xl border border-theme-border bg-theme-card/55 backdrop-blur-md p-4 sm:p-5"
+                      className="focus-card rounded-2xl border border-theme-border bg-theme-card/85 p-4 sm:p-5"
                     >
                       <div className="inline-flex items-center justify-center h-9 w-9 rounded-xl bg-accent/15 text-accent-light mb-3">
                         <IconC size={18} />
@@ -156,7 +156,7 @@ export default function About({ profile }: AboutProps) {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.05 }}
-                    className="focus-card rounded-2xl border border-theme-border bg-theme-card/45 backdrop-blur-md p-4"
+                    className="focus-card rounded-2xl border border-theme-border bg-theme-card/80 p-4"
                   >
                     <p className="text-theme font-semibold inline-flex items-center gap-2 mb-1.5">
                       <span className="text-accent-light text-[11px] font-mono">[learning]</span>

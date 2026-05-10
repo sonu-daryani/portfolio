@@ -37,7 +37,7 @@ export default function ChatPanel() {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 16, scale: 0.96 }}
       transition={{ duration: 0.22 }}
-      className="ai-panel fixed bottom-24 right-3 sm:right-5 z-40 w-[min(420px,94vw)] max-h-[min(640px,80vh)] flex flex-col rounded-2xl border border-theme-border bg-theme-strong/85 backdrop-blur-2xl shadow-2xl overflow-hidden"
+      className="ai-panel fixed bottom-24 right-3 sm:right-5 z-40 w-[min(420px,94vw)] max-h-[min(640px,80vh)] flex flex-col rounded-2xl border border-theme-border bg-theme-strong/98 dark:bg-zinc-950/98 shadow-2xl overflow-hidden"
     >
       <Header onClose={closePanel} />
 
@@ -83,8 +83,8 @@ function Header({ onClose }: { onClose: () => void }) {
         </div>
       </div>
       <div className="flex items-center gap-3">
-        <span className="inline-flex items-center gap-1.5 text-[11px] font-mono text-emerald-300">
-          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="inline-flex items-center gap-1.5 text-[11px] font-mono text-emerald-300">
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
           live
         </span>
         <button

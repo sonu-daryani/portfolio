@@ -11,7 +11,7 @@ export default function RoleChip({ icon, label, className }: RoleChipProps) {
   return (
     <span
       className={cn(
-        'role-chip inline-flex items-center gap-1.5 rounded-full border border-theme-border bg-theme-card/70 px-3 py-1 text-xs font-medium text-theme backdrop-blur-md',
+        'role-chip inline-flex items-center gap-1.5 rounded-full border border-theme-border bg-theme-card/90 px-3 py-1 text-xs font-medium text-theme',
         className,
       )}
     >

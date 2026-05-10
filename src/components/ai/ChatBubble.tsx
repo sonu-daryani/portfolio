@@ -47,10 +47,10 @@ export default function ChatBubble({ msg }: ChatBubbleProps) {
 
 function TypingDots() {
   return (
-    <span className="ai-typing inline-flex items-center gap-1 ml-1 align-middle">
-      <span className="h-1.5 w-1.5 rounded-full bg-current opacity-70 animate-pulse" />
-      <span className="h-1.5 w-1.5 rounded-full bg-current opacity-70 animate-pulse [animation-delay:120ms]" />
-      <span className="h-1.5 w-1.5 rounded-full bg-current opacity-70 animate-pulse [animation-delay:240ms]" />
+    <span className="ai-typing inline-flex items-center gap-1 ml-1 align-middle" aria-hidden>
+      <span className="h-1.5 w-1.5 rounded-full bg-current opacity-90" />
+      <span className="h-1.5 w-1.5 rounded-full bg-current opacity-55" />
+      <span className="h-1.5 w-1.5 rounded-full bg-current opacity-35" />
     </span>
   )
 }

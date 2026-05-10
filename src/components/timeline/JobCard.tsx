@@ -9,7 +9,7 @@ interface JobCardProps {
 
 export default function JobCard({ job, current }: JobCardProps) {
   return (
-    <article className="timeline-card rounded-2xl border border-theme-border bg-theme-card/85 backdrop-blur-md p-5 sm:p-6 shadow-md">
+    <article className="timeline-card rounded-2xl border border-theme-border bg-theme-card/92 p-5 sm:p-6 shadow-md">
       <header className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
         <div className="flex items-start gap-3 min-w-0">
           {job.previewImage ? (

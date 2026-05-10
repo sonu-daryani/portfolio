@@ -21,7 +21,7 @@ export default function HeroStats() {
       {STATS.map((s) => (
         <div
           key={s.label}
-          className="hero-stat rounded-xl border border-theme-border bg-theme-card/60 backdrop-blur-md px-3 py-3 text-center sm:text-left"
+          className="hero-stat rounded-xl border border-theme-border bg-theme-card/85 dark:bg-theme-card/80 px-3 py-3 text-center sm:text-left"
         >
           <p className="text-xl sm:text-2xl font-bold text-theme leading-none">{s.value}</p>
           <p className="text-[11px] sm:text-xs text-theme-muted font-mono mt-1">{s.label}</p>

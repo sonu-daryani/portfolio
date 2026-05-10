@@ -37,7 +37,7 @@ const paddingMap = {
 }
 
 const baseClasses =
-  'relative overflow-hidden rounded-2xl bg-theme-card/80 backdrop-blur-xl transition-all duration-300 ease-out'
+  'relative overflow-hidden rounded-2xl bg-theme-card/90 dark:bg-theme-card/95 transition-all duration-300 ease-out'
 
 const interactiveClasses =
   'hover:bg-theme-card/95'

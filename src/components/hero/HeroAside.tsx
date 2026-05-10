@@ -54,8 +54,8 @@ export default function HeroAside({ imageSrc, name }: HeroAsideProps) {
           <StatusPill label="online" tone="live" />
         </div>
         <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] font-mono text-white/90">
-          <span className="px-2 py-0.5 rounded-md bg-black/45 backdrop-blur-md">whoami</span>
-          <span className="px-2 py-0.5 rounded-md bg-black/45 backdrop-blur-md">v4.0</span>
+          <span className="px-2 py-0.5 rounded-md bg-black/55">whoami</span>
+          <span className="px-2 py-0.5 rounded-md bg-black/55">v4.0</span>
         </div>
       </motion.div>
 

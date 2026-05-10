@@ -99,7 +99,7 @@ export default function Contact({ profile }: ContactProps) {
         </p>
 
         <motion.div
-          className="chat-card rounded-2xl border border-theme-border bg-theme-card/65 backdrop-blur-xl shadow-2xl overflow-hidden"
+          className="chat-card rounded-2xl border border-theme-border bg-theme-card/92 dark:bg-zinc-950/95 shadow-2xl overflow-hidden"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.05 }}
@@ -115,7 +115,7 @@ export default function Contact({ profile }: ContactProps) {
               </p>
             </div>
             <span className="ml-auto inline-flex items-center gap-1.5 text-[11px] font-mono text-emerald-300">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" /> live
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" /> live
             </span>
           </div>
 
@@ -407,7 +407,7 @@ function ContactTile({ icon, label, value, href }: ContactTileProps) {
   return (
     <a
       href={href}
-      className="contact-tile flex items-center gap-3 rounded-2xl border border-theme-border bg-theme-card/70 backdrop-blur-md px-4 py-3 hover:border-accent/40 hover:bg-theme-card/90 transition group"
+      className="contact-tile flex items-center gap-3 rounded-2xl border border-theme-border bg-theme-card/88 px-4 py-3 hover:border-accent/40 hover:bg-theme-card/95 transition group"
     >
       <span className="inline-flex items-center justify-center h-9 w-9 rounded-xl bg-accent/15 text-accent shrink-0">
         {icon}

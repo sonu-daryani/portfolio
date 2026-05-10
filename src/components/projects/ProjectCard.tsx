@@ -41,7 +41,7 @@ export default function ProjectCard({ project, index, isAI, onSelect }: ProjectC
             />
           </div>
           {isAI ? (
-            <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-accent/90 text-on-accent text-[11px] font-mono shadow-md backdrop-blur">
+            <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-accent text-on-accent text-[11px] font-mono shadow-md">
               <Icon.Sparkle size={12} /> AI
             </span>
           ) : null}

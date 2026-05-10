@@ -64,7 +64,7 @@ export default function Shell({ children }: { children: React.ReactNode }) {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="mobile-menu-overlay fixed inset-0 z-50 bg-theme-strong/95 backdrop-blur-xl flex items-center justify-center"
+            className="mobile-menu-overlay fixed inset-0 z-50 bg-black/75 dark:bg-black/85 flex items-center justify-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
