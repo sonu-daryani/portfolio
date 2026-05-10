@@ -1,95 +1,59 @@
-import { useEffect, useRef, useState } from 'react'
+'use client'
+
+import { useMemo, useRef } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import type { Profile } from '../types/profile'
-import Button from './ui/Button'
+import { useTypewriter } from '../hooks/useTypewriter'
+import HeroAside from './hero/HeroAside'
+import HeroAvailability from './hero/HeroAvailability'
+import HeroBadges from './hero/HeroBadges'
+import HeroCTAs from './hero/HeroCTAs'
+import HeroStats from './hero/HeroStats'
 
 interface HeroProps {
   profile: Profile
-  onNavigateContact?: () => void
 }
 
-const stagger = 0.08
-const duration = 0.5
+const STAGGER = 0.08
+const FADE_DURATION = 0.5
 
-export default function Hero({ profile, onNavigateContact }: HeroProps) {
+export default function Hero({ profile }: HeroProps) {
+  const titles = useMemo(
+    () =>
+      profile.title
+        .split('|')
+        .map((t) => t.trim())
+        .filter(Boolean),
+    [profile.title],
+  )
+  const typedTitle = useTypewriter(titles.length ? titles : [profile.title])
+
+  // Subtle 3D tilt that follows the cursor over the hero card.
   const cardRef = useRef<HTMLDivElement>(null)
-  const [typedTitle, setTypedTitle] = useState('')
   const x = useMotionValue(0.5)
   const y = useMotionValue(0.5)
   const spring = { type: 'spring' as const, stiffness: 300, damping: 30 }
-  const rotateX = useSpring(useTransform(y, [0, 1], [8, -8]), spring)
-  const rotateY = useSpring(useTransform(x, [0, 1], [-8, 8]), spring)
-
-  useEffect(() => {
-    const titles = profile.title
-      .split('|')
-      .map((item) => item.trim())
-      .filter(Boolean)
-
-    const queue = titles.length ? titles : [profile.title]
-    let titleIndex = 0
-    let charIndex = 0
-    let deleting = false
-    let timeoutId: number | undefined
-
-    const tick = () => {
-      const current = queue[titleIndex]
-
-      if (!deleting) {
-        charIndex += 1
-        setTypedTitle(current.slice(0, charIndex))
-
-        if (charIndex === current.length) {
-          deleting = true
-          timeoutId = window.setTimeout(tick, 1400)
-          return
-        }
-
-        timeoutId = window.setTimeout(tick, 55)
-        return
-      }
-
-      charIndex -= 1
-      setTypedTitle(current.slice(0, Math.max(0, charIndex)))
-
-      if (charIndex === 0) {
-        deleting = false
-        titleIndex = (titleIndex + 1) % queue.length
-        timeoutId = window.setTimeout(tick, 300)
-        return
-      }
-
-      timeoutId = window.setTimeout(tick, 30)
-    }
-
-    timeoutId = window.setTimeout(tick, 350)
-    return () => {
-      if (timeoutId) {
-        window.clearTimeout(timeoutId)
-      }
-    }
-  }, [profile.title])
+  const rotateX = useSpring(useTransform(y, [0, 1], [6, -6]), spring)
+  const rotateY = useSpring(useTransform(x, [0, 1], [-6, 6]), spring)
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return
-    const rect = cardRef.current.getBoundingClientRect()
-    const w = rect.width
-    const h = rect.height
-    x.set((e.clientX - rect.left) / w)
-    y.set((e.clientY - rect.top) / h)
+    const rect = cardRef.current?.getBoundingClientRect()
+    if (!rect) return
+    x.set((e.clientX - rect.left) / rect.width)
+    y.set((e.clientY - rect.top) / rect.height)
   }
 
-  const handleMouseLeave = () => {
+  const resetTilt = () => {
     x.set(0.5)
     y.set(0.5)
   }
 
   return (
-    <section className="min-h-[calc(100vh-8rem)] flex flex-col justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24 py-12 sm:py-16 md:py-20 lg:py-24">
+    <section className="relative min-h-[calc(100vh-8rem)] flex flex-col justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24 py-10 sm:py-14 md:py-16 lg:py-20">
       <div className="max-w-6xl mx-auto w-full">
         <motion.div
           ref={cardRef}
-          className="flex flex-col lg:flex-row items-center lg:items-start gap-8 sm:gap-10 md:gap-12 lg:gap-14 xl:gap-16"
+          className="grid lg:grid-cols-[minmax(0,1fr)_320px] xl:grid-cols-[minmax(0,1fr)_360px] items-start gap-10 sm:gap-12 lg:gap-14"
           style={{
             perspective: 1000,
             rotateX,
@@ -97,176 +61,78 @@ export default function Hero({ profile, onNavigateContact }: HeroProps) {
             transformStyle: 'preserve-3d',
           }}
           onMouseMove={handleMouseMove}
-          onMouseLeave={handleMouseLeave}
+          onMouseLeave={resetTilt}
           initial="hidden"
           animate="visible"
           variants={{
-            visible: { transition: { staggerChildren: stagger, delayChildren: 0.1 } },
+            visible: { transition: { staggerChildren: STAGGER, delayChildren: 0.05 } },
             hidden: {},
           }}
         >
-          {/* Image - responsive order: first on mobile, left on desktop */}
-          <motion.div
-            className="flex-shrink-0 w-full max-w-[280px] sm:max-w-[320px] md:max-w-[340px] lg:max-w-none lg:w-72 xl:w-80"
-            style={{ transform: 'translateZ(24px)' }}
-            variants={{
-              hidden: { opacity: 0, y: 24, rotateY: -12 },
-              visible: {
-                opacity: 1,
-                y: 0,
-                rotateY: 0,
-                transition: { duration, ease: [0.22, 0.61, 0.36, 1] },
-              },
-            }}
-          >
-            <motion.div
-              className="relative overflow-hidden rounded-[1.35rem] sm:rounded-[1.5rem] bg-theme-card/30"
-              style={{
-                transform: 'translateZ(0)',
-                boxShadow: '0 8px 32px -8px rgba(0,0,0,0.5), 0 16px 48px -16px rgba(0,0,0,0.4)',
-              }}
-              whileHover={{
-                scale: 1.02,
-                boxShadow: '0 20px 50px -16px rgba(0,0,0,0.55), 0 0 40px -12px rgba(167,139,250,0.2)',
-                transition: { duration: 0.25 },
-              }}
-            >
-              <img
-                src={profile.image}
-                alt={profile.name}
-                className="w-full aspect-square object-cover rounded-[1.35rem] sm:rounded-[1.5rem]"
-              />
-              <span
-                className="pointer-events-none absolute inset-0 rounded-[1.35rem] sm:rounded-[1.5rem] opacity-80"
-                style={{
-                  background: 'linear-gradient(160deg, transparent 30%, rgba(167,139,250,0.06) 100%)',
-                }}
-                aria-hidden
-              />
-            </motion.div>
-          </motion.div>
-
-          {/* Content */}
           <div
-            className="flex-1 min-w-0 text-center lg:text-left flex flex-col items-center lg:items-start"
+            className="flex-1 min-w-0 text-center lg:text-left flex flex-col items-center lg:items-start order-2 lg:order-1"
             style={{ transform: 'translateZ(16px)' }}
           >
+            <HeroBadges />
+
             <motion.p
-              className="text-accent font-mono text-sm sm:text-base tracking-wide mb-2 sm:mb-3"
-              variants={{
-                hidden: { opacity: 0, x: -20 },
-                visible: { opacity: 1, x: 0, transition: { duration } },
-              }}
+              className="text-accent font-mono text-sm sm:text-base tracking-wide mb-2"
+              variants={fadeUp}
             >
-              Hi, I'm
+              {'<'} Hi, I&apos;m {' />'}
             </motion.p>
+
             <motion.h1
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-theme tracking-tight leading-[1.1] mb-2 sm:mb-4"
-              variants={{
-                hidden: { opacity: 0, y: 20, rotateX: 10 },
-                visible: {
-                  opacity: 1,
-                  y: 0,
-                  rotateX: 0,
-                  transition: { duration, ease: [0.22, 0.61, 0.36, 1] },
-                },
-              }}
+              className="hero-title text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight leading-[1.05] mb-3"
+              variants={titleReveal}
             >
               {profile.name}
             </motion.h1>
+
             <motion.p
               className="text-lg sm:text-xl md:text-2xl text-theme-muted font-medium mb-3 sm:mb-4 max-w-2xl"
-              variants={{
-                hidden: { opacity: 0, y: 16 },
-                visible: { opacity: 1, y: 0, transition: { duration } },
-              }}
+              variants={fadeUp}
             >
-              <span>{typedTitle}</span>
+              <span className="text-theme">{typedTitle}</span>
               <span className="typed-cursor" aria-hidden>
                 |
               </span>
             </motion.p>
+
             <motion.p
-              className="text-theme-muted text-sm sm:text-base mb-8 sm:mb-10 md:mb-12 max-w-xl leading-relaxed"
-              variants={{
-                hidden: { opacity: 0, y: 16 },
-                visible: { opacity: 1, y: 0, transition: { duration } },
-              }}
+              className="text-theme-muted text-sm sm:text-base mb-7 sm:mb-9 max-w-xl leading-relaxed"
+              variants={fadeUp}
             >
-              {profile.tagline}
+              I ship <span className="text-theme font-medium">multi-tenant SaaS</span> with
+              Next.js, NestJS, and Azure — currently leading frontend for an AI recruitment
+              platform, and going deep on GenAI, system design, and cloud as I grow.
             </motion.p>
 
-            <motion.div
-              className="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4"
-              variants={{
-                hidden: { opacity: 0, y: 16 },
-                visible: {
-                  opacity: 1,
-                  y: 0,
-                  transition: { duration, staggerChildren: 0.06, delayChildren: 0.1 },
-                },
-              }}
-            >
-              {[
-                {
-                  label: 'Get in touch',
-                  onClick: true,
-                  variant: 'primary' as const,
-                },
-                {
-                  label: 'GitHub',
-                  href: profile.links.github,
-                  variant: 'secondary' as const,
-                },
-                {
-                  label: 'LinkedIn',
-                  href: profile.links.linkedin,
-                  variant: 'secondary' as const,
-                },
-                {
-                  label: 'Download CV',
-                  href: '/sonu-daryani-cv.pdf',
-                  variant: 'secondary' as const,
-                  download: true,
-                },
-              ].map((item) => (
-                <motion.div
-                  key={item.label}
-                  variants={{
-                    hidden: { opacity: 0, y: 12 },
-                    visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
-                  }}
-                  style={{ transform: 'translateZ(8px)' }}
-                >
-                  {item.onClick ? (
-                    <Button
-                      variant={item.variant}
-                      size="lg"
-                      liquid
-                      onClick={onNavigateContact}
-                    >
-                      {item.label}
-                    </Button>
-                  ) : (
-                    <Button
-                      as="a"
-                      href={item.href}
-                      target={item.download ? undefined : '_blank'}
-                      rel="noopener noreferrer"
-                      variant={item.variant}
-                      size="lg"
-                      liquid
-                      download={item.download ? 'Sonu_Daryani_CV.pdf' : undefined}
-                    >
-                      {item.label}
-                    </Button>
-                  )}
-                </motion.div>
-              ))}
-            </motion.div>
+            <HeroCTAs github={profile.links.github} linkedin={profile.links.linkedin} />
+
+            <HeroStats />
+
+            <HeroAvailability availability={profile.availability} />
           </div>
+
+          <HeroAside imageSrc={profile.image} name={profile.name} />
         </motion.div>
       </div>
     </section>
   )
+}
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: FADE_DURATION } },
+}
+
+const titleReveal = {
+  hidden: { opacity: 0, y: 20, rotateX: 10 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    rotateX: 0,
+    transition: { duration: FADE_DURATION, ease: [0.22, 0.61, 0.36, 1] as const },
+  },
 }

@@ -14,6 +14,11 @@ export interface ProfileSkills {
   tools: string[]
 }
 
+export interface LearningTrack {
+  area: string
+  detail: string
+}
+
 export interface ExperienceItem {
   role: string
   company: string
@@ -40,6 +45,12 @@ export interface Education {
   period: string
 }
 
+export interface Availability {
+  baseLocation: string
+  localModes: string[]
+  remoteOnlyElsewhere: boolean
+}
+
 export interface Profile {
   name: string
   title: string
@@ -56,4 +67,6 @@ export interface Profile {
   achievements: string[]
   education: Education
   certification: string
+  availability: Availability
+  learning: LearningTrack[]
 }

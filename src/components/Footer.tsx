@@ -1,42 +1,45 @@
-import type { Profile } from '../types/profile'
-import Button from './ui/Button'
+'use client'
 
-interface FooterProps {
-  profile: Profile
-}
+import Link from 'next/link'
+import { profile } from '../data/profile'
+import { Icon } from './ui/Icon'
 
-export default function Footer({ profile }: FooterProps) {
+export default function Footer() {
   return (
-    <footer className="site-footer border-t border-theme-border py-6 sm:py-8 px-4 sm:px-6 md:px-12 bg-theme-strong/30 backdrop-blur-sm flex-shrink-0">
-      <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p className="text-theme-muted text-sm">
-          © {new Date().getFullYear()} {profile.name}. Built with Vite + React + Three.js
+    <footer className="site-footer border-t border-theme-border py-4 sm:py-5 px-4 sm:px-6 md:px-12 bg-theme-strong/30 backdrop-blur-sm flex-shrink-0">
+      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+        <p className="text-theme-muted text-xs sm:text-sm font-mono">
+          © {new Date().getFullYear()} {profile.name} — built with{' '}
+          <span className="text-accent">Next.js</span> +{' '}
+          <span className="text-accent">TypeScript</span> +{' '}
+          <span className="text-accent">Three.js</span>
         </p>
-        <div className="flex gap-4">
-          <Button
-            as="a"
+        <div className="flex items-center gap-2">
+          <Link
+            href="/projects"
+            className="text-theme-muted hover:text-accent text-xs font-mono inline-flex items-center gap-1"
+          >
+            Projects <Icon.ArrowUpRight size={12} />
+          </Link>
+          <span className="text-theme-muted/40">·</span>
+          <a
             href={profile.links.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            variant="ghost"
-            size="sm"
-            className="!p-0 min-w-0"
+            className="text-theme-muted hover:text-accent inline-flex items-center"
             aria-label="LinkedIn"
           >
-            LinkedIn
-          </Button>
-          <Button
-            as="a"
+            <Icon.Linkedin size={16} />
+          </a>
+          <a
             href={profile.links.github}
             target="_blank"
             rel="noopener noreferrer"
-            variant="ghost"
-            size="sm"
-            className="!p-0 min-w-0"
+            className="text-theme-muted hover:text-accent inline-flex items-center"
             aria-label="GitHub"
           >
-            GitHub
-          </Button>
+            <Icon.Github size={16} />
+          </a>
         </div>
       </div>
     </footer>

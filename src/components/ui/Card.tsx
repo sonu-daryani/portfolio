@@ -1,5 +1,7 @@
+'use client'
+
 import { forwardRef, type ReactNode } from 'react'
-import { motion } from 'framer-motion'
+import { motion, type MotionProps } from 'framer-motion'
 import { cn } from '../../lib/utils'
 
 type CardElement = 'div' | 'article' | 'section' | 'a' | 'button'
@@ -20,11 +22,11 @@ export interface CardProps {
   children?: ReactNode
   onClick?: () => void
   /** Framer motion variants / initial / animate for entrance */
-  initial?: object
-  animate?: object
-  whileInView?: object
-  viewport?: { once?: boolean; margin?: string }
-  transition?: { duration?: number; delay?: number }
+  initial?: MotionProps['initial']
+  animate?: MotionProps['animate']
+  whileInView?: MotionProps['whileInView']
+  viewport?: MotionProps['viewport']
+  transition?: MotionProps['transition']
 }
 
 const paddingMap = {
