@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useMemo, useRef, useState } from 'react'
 import { streamChat } from '../lib/chatStream'
 import { isApiError } from '../lib/apiClient'
 
@@ -132,5 +132,8 @@ export function useChatStream({
     [messages, streaming, endpoint],
   )
 
-  return { messages, streaming, send, stop, reset }
+  return useMemo(
+    () => ({ messages, streaming, send, stop, reset }),
+    [messages, streaming, send, stop, reset],
+  )
 }

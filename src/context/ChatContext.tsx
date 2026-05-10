@@ -74,7 +74,19 @@ export function ChatProvider({
       greeting,
       suggestions,
     }),
-    [open, openPanel, closePanel, togglePanel, stream, greeting, suggestions],
+    [
+      open,
+      openPanel,
+      closePanel,
+      togglePanel,
+      stream.messages,
+      stream.streaming,
+      stream.send,
+      stream.stop,
+      stream.reset,
+      greeting,
+      suggestions,
+    ],
   )
 
   return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>

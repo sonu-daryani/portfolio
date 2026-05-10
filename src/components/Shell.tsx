@@ -7,7 +7,6 @@ import { useTheme } from '../context/ThemeContext'
 import Nav from './Nav'
 import Footer from './Footer'
 import Button from './ui/Button'
-import AILauncher from './ai/AILauncher'
 
 export interface SectionItem {
   to: string
@@ -98,8 +97,6 @@ export default function Shell({ children }: { children: React.ReactNode }) {
           </motion.div>
         )}
       </AnimatePresence>
-
-      <AILauncher />
     </>
   )
 }

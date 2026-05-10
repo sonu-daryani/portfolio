@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import ChatBootstrap from '../components/ChatBootstrap'
 import Providers from '../components/Providers'
 import Shell from '../components/Shell'
 import './globals.css'
@@ -48,6 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <Providers>
           <Shell>{children}</Shell>
+          <ChatBootstrap />
         </Providers>
       </body>
     </html>
