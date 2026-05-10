@@ -1,12 +1,9 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { AdaptiveDpr, PerformanceMonitor } from '@react-three/drei'
-import { Canvas } from '@react-three/fiber'
+import { AnimatePresence, motion } from 'framer-motion'
 import { usePathname, useRouter } from 'next/navigation'
 import { useTheme } from '../context/ThemeContext'
-import Scene3D from './Scene3D'
 import Nav from './Nav'
 import Footer from './Footer'
 import Button from './ui/Button'
@@ -27,25 +24,9 @@ export const SECTIONS: SectionItem[] = [
 
 export default function Shell({ children }: { children: React.ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [mounted, setMounted] = useState(false)
-  const [canvasFrameloop, setCanvasFrameloop] = useState<'always' | 'never'>('always')
-  const prefersReducedMotion = useReducedMotion()
   const { theme } = useTheme()
   const pathname = usePathname()
   const router = useRouter()
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  useEffect(() => {
-    const onVisibility = () => {
-      setCanvasFrameloop(document.visibilityState === 'hidden' ? 'never' : 'always')
-    }
-    document.addEventListener('visibilitychange', onVisibility)
-    onVisibility()
-    return () => document.removeEventListener('visibilitychange', onVisibility)
-  }, [])
 
   useEffect(() => {
     setMenuOpen(false)
@@ -57,26 +38,8 @@ export default function Shell({ children }: { children: React.ReactNode }) {
         className={`fixed inset-0 z-0 canvas-bg ${
           theme === 'light' ? 'canvas-bg-light' : 'canvas-bg-dark'
         }`}
-      >
-        {mounted ? (
-          <Canvas
-            key={theme}
-            camera={{ position: [0, 0, 6], fov: 50 }}
-            frameloop={canvasFrameloop}
-            gl={{
-              alpha: false,
-              antialias: true,
-              powerPreference: 'high-performance',
-            }}
-            dpr={[1, 1.5]}
-          >
-            <PerformanceMonitor>
-              <AdaptiveDpr />
-              <Scene3D theme={theme} reducedMotion={Boolean(prefersReducedMotion)} />
-            </PerformanceMonitor>
-          </Canvas>
-        ) : null}
-      </div>
+        aria-hidden
+      />
 
       <div className="relative z-10 flex flex-col h-screen max-h-screen overflow-hidden">
         <Nav menuOpen={menuOpen} setMenuOpen={setMenuOpen} sections={SECTIONS} />

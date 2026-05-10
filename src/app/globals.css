@@ -74,18 +74,30 @@ html.light body {
   overscroll-behavior-y: contain;
 }
 
-/* Canvas wrapper – theme-specific so switch is instant (no stale bg) */
+/* Full-page backdrop (CSS only — no WebGL) */
 .canvas-bg-light {
-  background: #ffffff;
+  background:
+    radial-gradient(ellipse 120% 80% at 100% 0%, rgba(167, 139, 250, 0.12) 0%, transparent 55%),
+    radial-gradient(ellipse 90% 70% at 0% 100%, rgba(148, 163, 184, 0.14) 0%, transparent 50%),
+    #ffffff;
 }
 .canvas-bg-dark {
-  background: #000000;
+  background:
+    radial-gradient(ellipse 100% 70% at 80% 10%, rgba(124, 58, 237, 0.22) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 60% at 10% 90%, rgba(76, 29, 149, 0.35) 0%, transparent 55%),
+    #000000;
 }
 html.light .canvas-bg-light {
-  background: #ffffff !important;
+  background:
+    radial-gradient(ellipse 120% 80% at 100% 0%, rgba(167, 139, 250, 0.12) 0%, transparent 55%),
+    radial-gradient(ellipse 90% 70% at 0% 100%, rgba(148, 163, 184, 0.14) 0%, transparent 50%),
+    #ffffff !important;
 }
 html.dark .canvas-bg-dark {
-  background: #000000 !important;
+  background:
+    radial-gradient(ellipse 100% 70% at 80% 10%, rgba(124, 58, 237, 0.22) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 60% at 10% 90%, rgba(76, 29, 149, 0.35) 0%, transparent 55%),
+    #000000 !important;
 }
 
 /* Card shadows – global so production build is consistent */
