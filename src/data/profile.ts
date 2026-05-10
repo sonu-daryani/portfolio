@@ -198,6 +198,18 @@ export const profile: Profile = {
       previewImage:
         'https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fhls-react-player?w=1200',
     },
+    {
+      name: 'TrackCryptoPro',
+      description:
+        'Live cryptocurrency prices and watchlist — responsive React app for tracking coins and saving favorites.',
+      detailedDescription:
+        'TrackCryptoPro is a portfolio crypto dashboard: live cryptocurrency prices, a watchlist for tracked assets, and a responsive UI tuned for quick scanning on desktop and mobile. Deployed on Vercel for fast loads and global CDN delivery.',
+      tech: ['React', 'TypeScript', 'Tailwind CSS'],
+      link: 'https://crypto-tracking-react-app.vercel.app/',
+      date: 'May 2026',
+      previewImage:
+        'https://s.wordpress.com/mshots/v1/https%3A%2F%2Fcrypto-tracking-react-app.vercel.app%2F?w=1200',
+    },
   ],
   achievements: [
     'Published npm library hls-react-player (React HLS/DASH/MP4 player, ~1K weekly downloads)',
