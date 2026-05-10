@@ -1,9 +1,10 @@
 'use client'
 
 import { useMemo, useRef, useCallback, useEffect } from 'react'
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from 'framer-motion'
 import type { Profile } from '../types/profile'
-import { useTypewriter } from '../hooks/useTypewriter'
+import { usePointerFine } from '../hooks/usePointerFine'
+import { HeroTypedTitle } from './hero/HeroTypedTitle'
 import HeroAside from './hero/HeroAside'
 import HeroAvailability from './hero/HeroAvailability'
 import HeroBadges from './hero/HeroBadges'
@@ -26,9 +27,16 @@ export default function Hero({ profile }: HeroProps) {
         .filter(Boolean),
     [profile.title],
   )
-  const typedTitle = useTypewriter(titles.length ? titles : [profile.title])
+  const titlePhrases = useMemo(
+    () => (titles.length ? titles : [profile.title]),
+    [titles, profile.title],
+  )
 
-  // Subtle 3D tilt that follows the cursor over the hero card.
+  const reducedMotion = useReducedMotion()
+  const pointerFine = usePointerFine()
+  const tiltEnabled = !reducedMotion && pointerFine
+
+  // Subtle 3D tilt that follows the cursor over the hero card (desktop mouse only).
   const cardRef = useRef<HTMLDivElement>(null)
   const tiltRaf = useRef<number | null>(null)
   const pendingMove = useRef<{ cx: number; cy: number } | null>(null)
@@ -72,14 +80,18 @@ export default function Hero({ profile }: HeroProps) {
         <motion.div
           ref={cardRef}
           className="grid lg:grid-cols-[minmax(0,1fr)_320px] xl:grid-cols-[minmax(0,1fr)_360px] items-start gap-10 sm:gap-12 lg:gap-14"
-          style={{
-            perspective: 1000,
-            rotateX,
-            rotateY,
-            transformStyle: 'preserve-3d',
-          }}
-          onMouseMove={handleMouseMove}
-          onMouseLeave={resetTilt}
+          style={
+            tiltEnabled
+              ? {
+                  perspective: 1000,
+                  rotateX,
+                  rotateY,
+                  transformStyle: 'preserve-3d',
+                }
+              : undefined
+          }
+          onMouseMove={tiltEnabled ? handleMouseMove : undefined}
+          onMouseLeave={tiltEnabled ? resetTilt : undefined}
           initial="hidden"
           animate="visible"
           variants={{
@@ -107,15 +119,7 @@ export default function Hero({ profile }: HeroProps) {
               {profile.name}
             </motion.h1>
 
-            <motion.p
-              className="text-lg sm:text-xl md:text-2xl text-theme-muted font-medium mb-3 sm:mb-4 max-w-2xl"
-              variants={fadeUp}
-            >
-              <span className="text-theme">{typedTitle}</span>
-              <span className="typed-cursor" aria-hidden>
-                |
-              </span>
-            </motion.p>
+            <HeroTypedTitle phrases={titlePhrases} variants={fadeUp} />
 
             <motion.p
               className="text-theme-muted text-sm sm:text-base mb-7 sm:mb-9 max-w-xl leading-relaxed"
