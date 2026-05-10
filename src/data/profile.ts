@@ -177,17 +177,30 @@ export const profile: Profile = {
     {
       name: 'StreamFlix',
       description:
-        'Next.js streaming-style demo — browse titles, responsive catalog UI, and a polished viewing experience inspired by modern OTT layouts.',
+        'Next.js streaming-style demo — browse titles, responsive catalog UI, and playback via the open-source hls-react-player package.',
       detailedDescription:
-        'StreamFlix is a portfolio streaming platform built with Next.js: catalog browsing, responsive grids and detail surfaces, and playback-oriented layouts inspired by mainstream OTT apps. Deployed on Vercel for fast global delivery; focused on performance, accessible navigation, and a cohesive dark UI suitable for video-heavy experiences.',
-      tech: ['Next.js', 'TypeScript', 'React', 'Tailwind CSS'],
+        'StreamFlix is a portfolio streaming platform built with Next.js: catalog browsing, responsive grids and detail surfaces, and playback-oriented layouts inspired by mainstream OTT apps. Video playback uses hls-react-player (MP4, HLS, DASH) with a StreamFlix-style control layer. Deployed on Vercel; focused on performance, accessible navigation, and a cohesive dark UI for video-heavy experiences.',
+      tech: ['Next.js', 'TypeScript', 'React', 'Tailwind CSS', 'hls-react-player'],
       link: 'https://streamflix-nu-nine.vercel.app/',
       date: 'May 2026',
       previewImage:
         'https://s.wordpress.com/mshots/v1/https%3A%2F%2Fstreamflix-nu-nine.vercel.app%2F?w=1200',
     },
+    {
+      name: 'hls-react-player (npm)',
+      description:
+        'Open-source React video player on npm — MP4, HLS, and DASH with StreamFlix-style controls, keyboard shortcuts, and customizable UI.',
+      detailedDescription:
+        'Published npm package hls-react-player: a reusable StreamPlayer component for MP4, HLS (m3u8), and DASH (MPD), with auto-detection via hls.js and dash.js, custom controls, resolution/audio/subtitle selection for HLS, embed mode, optional WebVTT scrub thumbnails, and TypeScript types. Ships bundled styles and powers the StreamFlix demo. Repository: github.com/sonu-daryani/react-stream-player.',
+      tech: ['React', 'TypeScript', 'hls.js', 'DASH', 'npm'],
+      link: 'https://www.npmjs.com/package/hls-react-player',
+      date: 'May 2026',
+      previewImage:
+        'https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fhls-react-player?w=1200',
+    },
   ],
   achievements: [
+    'Published npm library hls-react-player (React HLS/DASH/MP4 player, ~1K weekly downloads)',
     'Rockstar Rookie Award – Crownstack',
     'Best Content Award – Crownstack',
     'Project Hero Award – Crownstack',
