@@ -1,6 +1,5 @@
 'use client'
 
-import { motion, AnimatePresence } from 'framer-motion'
 import { useMemo, useState } from 'react'
 import type { Profile } from '../types/profile'
 import { isAIProject, uniqueTechs } from '../lib/projects'
@@ -38,14 +37,9 @@ export default function Projects({ profile }: ProjectsProps) {
           {filtered.length} of {profile.projects.length} loaded
         </span>
       </div>
-      <motion.h2
-        className="text-3xl sm:text-4xl md:text-5xl font-bold text-theme tracking-tight mb-3"
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
-      >
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-theme tracking-tight mb-3 opacity-0 motion-safe:animate-fade-in-up-sm motion-reduce:opacity-100 motion-reduce:animate-none">
         Selected <span className="text-accent-light">builds</span>.
-      </motion.h2>
+      </h2>
       <p className="text-theme-muted text-base sm:text-lg mb-6 max-w-2xl">
         Production work across AI recruiting, fintech, scheduling, and commerce — shipped end
         to end.
@@ -54,17 +48,15 @@ export default function Projects({ profile }: ProjectsProps) {
       <ProjectFilters techs={techs} value={filter} onChange={setFilter} />
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        <AnimatePresence mode="popLayout">
-          {filtered.map((project, i) => (
-            <ProjectCard
-              key={project.name}
-              project={project}
-              index={i}
-              isAI={isAIProject(project)}
-              onSelect={setSelected}
-            />
-          ))}
-        </AnimatePresence>
+        {filtered.map((project, i) => (
+          <ProjectCard
+            key={project.name}
+            project={project}
+            index={i}
+            isAI={isAIProject(project)}
+            onSelect={setSelected}
+          />
+        ))}
       </div>
 
       {filtered.length === 0 ? (
@@ -77,10 +69,7 @@ export default function Projects({ profile }: ProjectsProps) {
         as="div"
         padding="lg"
         liquid
-        className="mt-12"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2 }}
+        className="mt-12 opacity-0 motion-safe:animate-fade-in motion-reduce:opacity-100 motion-reduce:animate-none delay-200"
       >
         <h3 className="text-theme font-semibold mb-4 tracking-tight inline-flex items-center gap-2">
           <Icon.Trophy size={16} className="text-accent" /> Achievements

@@ -1,6 +1,5 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import Button from '../ui/Button'
 import { Icon } from '../ui/Icon'
@@ -14,17 +13,7 @@ export default function HeroCTAs({ github, linkedin }: HeroCTAsProps) {
   const router = useRouter()
 
   return (
-    <motion.div
-      className="flex flex-wrap items-center justify-center lg:justify-start gap-3 mb-8"
-      variants={{
-        hidden: { opacity: 0, y: 16 },
-        visible: {
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.5, staggerChildren: 0.06, delayChildren: 0.1 },
-        },
-      }}
-    >
+    <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 mb-8 opacity-0 motion-safe:animate-fade-in-up motion-reduce:opacity-100 motion-reduce:animate-none delay-[380ms]">
       <Button variant="primary" size="lg" liquid onClick={() => router.push('/contact')}>
         <span className="inline-flex items-center gap-2">
           Hire me <Icon.ArrowRight size={16} />
@@ -69,6 +58,6 @@ export default function HeroCTAs({ github, linkedin }: HeroCTAsProps) {
           <Icon.Download size={16} /> Download CV
         </span>
       </Button>
-    </motion.div>
+    </div>
   )
 }

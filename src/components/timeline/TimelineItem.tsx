@@ -1,7 +1,8 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { cn } from '../../lib/utils'
 import type { ExperienceItem } from '../../types/profile'
+import { useInViewOnce } from '../../hooks/useInViewOnce'
 import JobCard from './JobCard'
 import TimelineDot from './TimelineDot'
 import TimelineRail from './TimelineRail'
@@ -14,20 +15,27 @@ interface TimelineItemProps {
 
 export default function TimelineItem({ job, index, isLast }: TimelineItemProps) {
   const isCurrent = index === 0
+  const { ref, inView } = useInViewOnce<HTMLLIElement>()
 
   return (
-    <motion.li
-      className="grid grid-cols-[20px_minmax(0,1fr)] gap-4 sm:grid-cols-[28px_minmax(0,1fr)] sm:gap-6"
-      initial={{ opacity: 0, x: -16 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.45, delay: index * 0.08 }}
+    <li
+      ref={ref}
+      className={cn(
+        'grid grid-cols-[20px_minmax(0,1fr)] gap-4 sm:grid-cols-[28px_minmax(0,1fr)] sm:gap-6',
+        !inView && 'opacity-0',
+        inView && 'motion-safe:animate-fade-in-left motion-reduce:opacity-100',
+      )}
+      style={
+        inView
+          ? { animationDelay: `${index * 80}ms`, animationFillMode: 'forwards' }
+          : undefined
+      }
     >
       <div className="flex flex-col items-center pt-3">
         <TimelineDot active={isCurrent} />
         {!isLast ? <TimelineRail /> : null}
       </div>
       <JobCard job={job} current={isCurrent} />
-    </motion.li>
+    </li>
   )
 }

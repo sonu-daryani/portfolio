@@ -1,6 +1,5 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import type { Profile } from '../types/profile'
 import Section from './ui/Section'
 import StatusPill from './ai/StatusPill'
@@ -21,14 +20,9 @@ export default function Experience({ profile }: ExperienceProps) {
           git log --oneline --graph
         </span>
       </div>
-      <motion.h2
-        className="text-3xl sm:text-4xl md:text-5xl font-bold text-theme mb-3 tracking-tight"
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
-      >
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-theme mb-3 tracking-tight opacity-0 motion-safe:animate-fade-in-up-sm motion-reduce:opacity-100 motion-reduce:animate-none">
         Experience.<span className="text-accent-light">timeline()</span>
-      </motion.h2>
+      </h2>
       <p className="text-theme-muted text-base sm:text-lg mb-10 max-w-2xl">
         Roughly three years of frontend-led full stack work — from React UI delivery to leading
         frontend architecture for an AI-powered recruitment platform.

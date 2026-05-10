@@ -1,6 +1,5 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import { forwardRef, useEffect, useRef, useState } from 'react'
 import { useChat } from '../../context/ChatContext'
 import ChatBubble from './ChatBubble'
@@ -30,14 +29,10 @@ export default function ChatPanel() {
   const showSuggestions = messages.length <= 1
 
   return (
-    <motion.div
+    <div
       role="dialog"
       aria-label="AI assistant"
-      initial={{ opacity: 0, y: 16, scale: 0.96 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: 16, scale: 0.96 }}
-      transition={{ duration: 0.22 }}
-      className="ai-panel fixed bottom-24 right-3 sm:right-5 z-40 w-[min(420px,94vw)] max-h-[min(640px,80vh)] flex flex-col rounded-2xl border border-theme-border bg-theme-strong/98 dark:bg-zinc-950/98 shadow-2xl overflow-hidden"
+      className="ai-panel fixed bottom-24 right-3 sm:right-5 z-40 w-[min(420px,94vw)] max-h-[min(640px,80vh)] flex flex-col rounded-2xl border border-theme-border bg-theme-strong/98 dark:bg-zinc-950/98 shadow-2xl overflow-hidden opacity-0 motion-safe:animate-panel-in motion-reduce:opacity-100 motion-reduce:animate-none"
     >
       <Header onClose={closePanel} />
 
@@ -64,7 +59,7 @@ export default function ChatPanel() {
       <p className="px-4 py-1.5 text-[10px] text-theme-muted/70 font-mono text-center border-t border-theme-border bg-theme-strong/30">
         grounded on the real profile · replies in seconds
       </p>
-    </motion.div>
+    </div>
   )
 }
 
@@ -83,7 +78,7 @@ function Header({ onClose }: { onClose: () => void }) {
         </div>
       </div>
       <div className="flex items-center gap-3">
-          <span className="inline-flex items-center gap-1.5 text-[11px] font-mono text-emerald-300">
+        <span className="inline-flex items-center gap-1.5 text-[11px] font-mono text-emerald-300">
           <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
           live
         </span>

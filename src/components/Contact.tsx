@@ -1,6 +1,5 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import { useState } from 'react'
 import type { Profile } from '../types/profile'
 import Button from './ui/Button'
@@ -83,27 +82,16 @@ export default function Contact({ profile }: ContactProps) {
             avg. reply · {'<'} 24h IST
           </span>
         </div>
-        <motion.h2
-          className="text-3xl sm:text-4xl md:text-5xl font-bold text-theme tracking-tight mb-3"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-        >
-          Let&apos;s ship something{' '}
-          <span className="text-accent-light">solid</span>.
-        </motion.h2>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-theme tracking-tight mb-3 opacity-0 motion-safe:animate-fade-in-up-sm motion-reduce:opacity-100 motion-reduce:animate-none">
+          Let&apos;s ship something <span className="text-accent-light">solid</span>.
+        </h2>
         <p className="text-theme-muted text-base sm:text-lg max-w-2xl mb-10">
           Open to senior frontend / full stack / lead roles, multi-tenant SaaS builds, and
           AI-adjacent product surfaces. Drop a note below — you&apos;ll get a confirmation
           email, and I&apos;ll reply personally.
         </p>
 
-        <motion.div
-          className="chat-card rounded-2xl border border-theme-border bg-theme-card/92 dark:bg-zinc-950/95 shadow-2xl overflow-hidden"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, delay: 0.05 }}
-        >
+        <div className="chat-card rounded-2xl border border-theme-border bg-theme-card/92 dark:bg-zinc-950/95 shadow-2xl overflow-hidden opacity-0 motion-safe:animate-fade-in-up motion-reduce:opacity-100 motion-reduce:animate-none delay-75">
           <div className="chat-card-header flex items-center gap-2 px-4 py-3 border-b border-theme-border">
             <span className="ai-launcher-orb !h-7 !w-7">
               <Icon.Send size={12} />
@@ -232,7 +220,7 @@ export default function Contact({ profile }: ContactProps) {
               </div>
             </form>
           )}
-        </motion.div>
+        </div>
 
         <div className="grid sm:grid-cols-2 gap-3 sm:gap-4 mt-8">
           <ContactTile
@@ -356,12 +344,7 @@ interface SuccessViewProps {
 
 function SuccessView({ email, onReset }: SuccessViewProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      className="p-5 sm:p-6 text-center"
-    >
+    <div className="p-5 sm:p-6 text-center opacity-0 motion-safe:animate-fade-in-up-sm motion-reduce:opacity-100 motion-reduce:animate-none">
       <div className="mx-auto w-12 h-12 rounded-full bg-emerald-500/15 border border-emerald-400/30 inline-flex items-center justify-center text-emerald-300 mb-4">
         <svg
           width="22"
@@ -392,7 +375,7 @@ function SuccessView({ email, onReset }: SuccessViewProps) {
           Send another message
         </Button>
       </div>
-    </motion.div>
+    </div>
   )
 }
 

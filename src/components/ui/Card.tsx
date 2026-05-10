@@ -1,7 +1,6 @@
 'use client'
 
 import { forwardRef, type ReactNode } from 'react'
-import { motion, type MotionProps } from 'framer-motion'
 import { cn } from '../../lib/utils'
 
 type CardElement = 'div' | 'article' | 'section' | 'a' | 'button'
@@ -9,11 +8,8 @@ type CardElement = 'div' | 'article' | 'section' | 'a' | 'button'
 export interface CardProps {
   as?: CardElement
   className?: string
-  /** Interactive hover state (border glow, shadow) */
   interactive?: boolean
-  /** Padding scale */
   padding?: 'none' | 'sm' | 'md' | 'lg'
-  /** Extra rounded for more liquid feel */
   liquid?: boolean
   href?: string
   target?: string
@@ -21,12 +17,6 @@ export interface CardProps {
   type?: 'button' | 'submit'
   children?: ReactNode
   onClick?: () => void
-  /** Framer motion variants / initial / animate for entrance */
-  initial?: MotionProps['initial']
-  animate?: MotionProps['animate']
-  whileInView?: MotionProps['whileInView']
-  viewport?: MotionProps['viewport']
-  transition?: MotionProps['transition']
 }
 
 const paddingMap = {
@@ -40,7 +30,7 @@ const baseClasses =
   'relative overflow-hidden rounded-2xl bg-theme-card/90 dark:bg-theme-card/95 transition-all duration-300 ease-out'
 
 const interactiveClasses =
-  'hover:bg-theme-card/95'
+  'hover:bg-theme-card/95 motion-safe:hover:scale-[1.01] motion-safe:active:scale-[0.99] transition-transform duration-200'
 
 const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
   {
@@ -55,37 +45,20 @@ const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
     rel,
     type,
     onClick,
-    initial,
-    animate,
-    whileInView,
-    viewport,
-    transition,
     ...rest
   },
-  ref
+  ref,
 ) {
   const classes = cn(
     baseClasses,
     liquid && 'rounded-[1.25rem] sm:rounded-[1.5rem]',
     paddingMap[padding],
     interactive && interactiveClasses,
-    className
+    className,
   )
 
   const style = {
     background: 'linear-gradient(160deg, var(--theme-card) 0%, rgba(255,255,255,0.02) 100%)',
-  }
-
-  const motionProps = {
-    initial,
-    animate,
-    whileInView,
-    viewport,
-    transition,
-    ...(interactive && {
-      whileHover: { scale: 1.01, transition: { duration: 0.2 } },
-      whileTap: { scale: 0.99, transition: { duration: 0.1 } },
-    }),
   }
 
   const content = (
@@ -96,48 +69,40 @@ const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
 
   if (Component === 'a' && href) {
     return (
-      <motion.a
+      <a
         ref={ref as React.Ref<HTMLAnchorElement>}
         href={href}
         target={target}
         rel={rel}
         className={classes}
         style={style}
-        {...motionProps}
         {...rest}
       >
         {content}
-      </motion.a>
+      </a>
     )
   }
 
   if (Component === 'button') {
     return (
-      <motion.button
+      <button
         ref={ref as React.Ref<HTMLButtonElement>}
         type={type ?? 'button'}
         onClick={onClick}
         className={classes}
         style={style}
-        {...motionProps}
         {...rest}
       >
         {content}
-      </motion.button>
+      </button>
     )
   }
 
-  const MotionEl = motion[Component as 'div' | 'article' | 'section']
+  const El = Component as 'div' | 'article' | 'section'
   return (
-    <MotionEl
-      ref={ref}
-      className={classes}
-      style={style}
-      {...motionProps}
-      {...rest}
-    >
+    <El ref={ref as React.Ref<HTMLDivElement>} className={classes} style={style} {...rest}>
       {content}
-    </MotionEl>
+    </El>
   )
 })
 

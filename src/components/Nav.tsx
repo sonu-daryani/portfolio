@@ -1,6 +1,5 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import type { SectionItem } from './Shell'
@@ -18,12 +17,7 @@ export default function Nav({ menuOpen, setMenuOpen, sections }: NavProps) {
   const pathname = usePathname()
 
   return (
-    <motion.header
-      className="fixed top-0 left-0 right-0 z-40 py-3 px-4 sm:py-4 sm:px-6 md:px-12"
-      initial={{ y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5 }}
-    >
+    <header className="fixed top-0 left-0 right-0 z-40 py-3 px-4 sm:py-4 sm:px-6 md:px-12 opacity-0 motion-safe:animate-nav-in motion-reduce:opacity-100 motion-reduce:animate-none">
       <nav className="nav-bar max-w-6xl mx-auto flex items-center justify-between rounded-xl sm:rounded-2xl py-2.5 px-3 sm:py-3 sm:px-5 bg-theme-strong/95 dark:bg-zinc-950/90 shadow-lg border border-theme-border/40">
         <Link
           href="/"
@@ -73,6 +67,6 @@ export default function Nav({ menuOpen, setMenuOpen, sections }: NavProps) {
           </Button>
         </div>
       </nav>
-    </motion.header>
+    </header>
   )
 }

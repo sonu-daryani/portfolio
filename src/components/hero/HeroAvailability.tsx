@@ -1,6 +1,5 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import Link from 'next/link'
 import type { Availability } from '../../types/profile'
 import { Icon } from '../ui/Icon'
@@ -11,13 +10,7 @@ interface HeroAvailabilityProps {
 
 export default function HeroAvailability({ availability }: HeroAvailabilityProps) {
   return (
-    <motion.div
-      className="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-x-3 gap-y-2 text-xs text-theme-muted font-mono"
-      variants={{
-        hidden: { opacity: 0 },
-        visible: { opacity: 1, transition: { duration: 0.6, delay: 0.3 } },
-      }}
-    >
+    <div className="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-x-3 gap-y-2 text-xs text-theme-muted font-mono opacity-0 motion-safe:animate-fade-in motion-reduce:opacity-100 motion-reduce:animate-none delay-500">
       <span className="inline-flex items-center gap-1.5">
         <Icon.Pin size={12} className="text-accent" />
         Based in {availability.baseLocation}
@@ -36,6 +29,6 @@ export default function HeroAvailability({ availability }: HeroAvailabilityProps
       <Link href="/projects" className="hover:text-accent inline-flex items-center gap-1">
         Browse projects <Icon.ArrowUpRight size={12} />
       </Link>
-    </motion.div>
+    </div>
   )
 }

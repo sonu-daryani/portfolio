@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
 
 interface TerminalIntroProps {
   lines: { prompt?: string; output: string; tone?: 'accent' | 'muted' | 'theme' }[]
@@ -24,12 +23,7 @@ export default function TerminalIntro({ lines, prompt = 'sonu@portfolio:~$' }: T
   }, [step, lines.length])
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.1 }}
-      className="terminal-card rounded-2xl border border-theme-border bg-theme-strong/92 dark:bg-zinc-950/90 p-4 sm:p-5 font-mono text-[13px] sm:text-sm shadow-xl overflow-hidden"
-    >
+    <div className="terminal-card rounded-2xl border border-theme-border bg-theme-strong/92 dark:bg-zinc-950/90 p-4 sm:p-5 font-mono text-[13px] sm:text-sm shadow-xl overflow-hidden opacity-0 motion-safe:animate-fade-in-up motion-reduce:opacity-100 motion-reduce:animate-none delay-200">
       <div className="flex items-center gap-1.5 pb-3 border-b border-theme-border">
         <span className="h-2.5 w-2.5 rounded-full bg-rose-400/80" />
         <span className="h-2.5 w-2.5 rounded-full bg-amber-400/80" />
@@ -40,18 +34,16 @@ export default function TerminalIntro({ lines, prompt = 'sonu@portfolio:~$' }: T
       </div>
       <div className="pt-3 space-y-1.5">
         {lines.slice(0, step).map((l, i) => (
-          <motion.div
+          <div
             key={i}
-            initial={{ opacity: 0, x: -6 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.25 }}
-            className="flex gap-2"
+            className="flex gap-2 opacity-0 motion-safe:animate-fade-in-left motion-reduce:opacity-100 motion-reduce:animate-none"
+            style={{ animationDelay: `${i * 40}ms`, animationFillMode: 'forwards' }}
           >
             {l.prompt !== undefined ? (
               <span className="text-accent shrink-0">{l.prompt || prompt}</span>
             ) : null}
             <span className={`${toneClass[l.tone ?? 'theme']} break-words`}>{l.output}</span>
-          </motion.div>
+          </div>
         ))}
         {step < lines.length ? (
           <span className="inline-block w-2 h-4 bg-accent/90 align-middle" />
@@ -62,6 +54,6 @@ export default function TerminalIntro({ lines, prompt = 'sonu@portfolio:~$' }: T
           </div>
         )}
       </div>
-    </motion.div>
+    </div>
   )
 }

@@ -12,7 +12,7 @@ export default function Footer() {
           © {new Date().getFullYear()} {profile.name} — built with{' '}
           <span className="text-accent">Next.js</span> +{' '}
           <span className="text-accent">TypeScript</span> +{' '}
-          <span className="text-accent">Framer Motion</span>
+          <span className="text-accent">Tailwind CSS</span>
         </p>
         <div className="flex items-center gap-2">
           <Link

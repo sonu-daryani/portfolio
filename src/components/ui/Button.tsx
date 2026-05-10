@@ -1,7 +1,6 @@
 'use client'
 
 import { forwardRef, type ReactNode } from 'react'
-import { motion } from 'framer-motion'
 import { cn } from '../../lib/utils'
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost'
@@ -10,7 +9,6 @@ export type ButtonSize = 'sm' | 'md' | 'lg' | 'icon'
 export interface ButtonProps {
   variant?: ButtonVariant
   size?: ButtonSize
-  /** Extra rounded for liquid feel (matches Card) */
   liquid?: boolean
   as?: 'button' | 'a'
   href?: string
@@ -33,15 +31,14 @@ const sizeClasses: Record<ButtonSize, string> = {
   icon: 'w-10 h-10 sm:w-12 sm:h-12 p-0 min-h-0 flex items-center justify-center',
 }
 
-const variantBase = 'rounded-2xl font-semibold transition-all duration-300 ease-out select-none touch-manipulation inline-flex items-center justify-center'
+const variantBase =
+  'rounded-2xl font-semibold transition-all duration-300 ease-out select-none touch-manipulation inline-flex items-center justify-center motion-safe:active:scale-[0.98]'
 
 const variantClasses: Record<ButtonVariant, string> = {
-  primary:
-    'text-white btn-primary border-0',
+  primary: 'text-white btn-primary border-0 motion-safe:hover:scale-[1.02]',
   secondary:
-    'text-theme btn-liquid border-0 card-shadow-hover',
-  ghost:
-    'bg-transparent text-theme hover:bg-theme-card/80 text-theme-muted hover:text-theme',
+    'text-theme btn-liquid border-0 card-shadow-hover motion-safe:hover:scale-[1.02]',
+  ghost: 'bg-transparent text-theme hover:bg-theme-card/80 text-theme-muted hover:text-theme',
 }
 
 const activeClasses = 'text-accent bg-accent/10'
@@ -65,7 +62,7 @@ const Button = forwardRef<HTMLButtonElement & HTMLAnchorElement, ButtonProps>(fu
     'aria-label': ariaLabel,
     ...rest
   },
-  ref
+  ref,
 ) {
   const classes = cn(
     variantBase,
@@ -74,18 +71,12 @@ const Button = forwardRef<HTMLButtonElement & HTMLAnchorElement, ButtonProps>(fu
     liquid && 'rounded-[1.25rem] sm:rounded-[1.5rem]',
     active && variant === 'ghost' && activeClasses,
     disabled && 'opacity-40 pointer-events-none',
-    className
+    className,
   )
-
-  const motionProps = {
-    className: classes,
-    whileHover: variant !== 'ghost' ? { scale: 1.02, transition: { duration: 0.2 } } : undefined,
-    whileTap: variant !== 'ghost' ? { scale: 0.98, transition: { duration: 0.1 } } : undefined,
-  }
 
   if (Component === 'a' && href) {
     return (
-      <motion.a
+      <a
         ref={ref as React.Ref<HTMLAnchorElement>}
         href={href}
         download={download}
@@ -93,26 +84,26 @@ const Button = forwardRef<HTMLButtonElement & HTMLAnchorElement, ButtonProps>(fu
         rel={rel}
         onClick={onClick}
         aria-label={ariaLabel}
-        {...motionProps}
+        className={classes}
         {...rest}
       >
         {children}
-      </motion.a>
+      </a>
     )
   }
 
   return (
-    <motion.button
+    <button
       ref={ref as React.Ref<HTMLButtonElement>}
       type={type}
       disabled={disabled}
       onClick={onClick}
       aria-label={ariaLabel}
-      {...motionProps}
+      className={classes}
       {...rest}
     >
       {children}
-    </motion.button>
+    </button>
   )
 })
 

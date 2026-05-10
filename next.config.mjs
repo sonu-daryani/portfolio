@@ -6,9 +6,6 @@ const nextConfig = {
       { protocol: 'https', hostname: 's.wordpress.com' },
     ],
   },
-  experimental: {
-    optimizePackageImports: ['framer-motion'],
-  },
 }
 
 export default nextConfig

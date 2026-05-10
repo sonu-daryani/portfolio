@@ -1,6 +1,5 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import { cn } from '../../lib/utils'
 
 interface StatusPillProps {
@@ -17,12 +16,9 @@ const toneClasses = {
 
 export default function StatusPill({ label, tone = 'live', className }: StatusPillProps) {
   return (
-    <motion.span
-      initial={{ opacity: 0, y: -6 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
+    <span
       className={cn(
-        'status-pill inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-mono tracking-wide bg-theme-card/90',
+        'status-pill inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-mono tracking-wide bg-theme-card/90 opacity-0 motion-safe:animate-fade-in-down motion-reduce:opacity-100 motion-reduce:animate-none',
         toneClasses[tone],
         className,
       )}
@@ -36,6 +32,6 @@ export default function StatusPill({ label, tone = 'live', className }: StatusPi
         )}
       />
       {label}
-    </motion.span>
+    </span>
   )
 }

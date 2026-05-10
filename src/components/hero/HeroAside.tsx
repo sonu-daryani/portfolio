@@ -1,6 +1,5 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import StatusPill from '../ai/StatusPill'
 import TerminalIntro from '../ai/TerminalIntro'
 
@@ -28,27 +27,12 @@ const TERMINAL_SCRIPT = [
 
 export default function HeroAside({ imageSrc, name }: HeroAsideProps) {
   return (
-    <motion.aside
-      className="order-1 lg:order-2 w-full max-w-[320px] mx-auto lg:mx-0 lg:max-w-none flex flex-col gap-4"
+    <aside
+      className="order-1 lg:order-2 w-full max-w-[320px] mx-auto lg:mx-0 lg:max-w-none flex flex-col gap-4 opacity-0 motion-safe:animate-fade-in-up motion-reduce:opacity-100 motion-reduce:animate-none delay-100"
       style={{ transform: 'translateZ(24px)' }}
-      variants={{
-        hidden: { opacity: 0, y: 24 },
-        visible: {
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.5, ease: [0.22, 0.61, 0.36, 1] },
-        },
-      }}
     >
-      <motion.div
-        className="hero-portrait relative overflow-hidden rounded-[1.5rem] bg-theme-card/30"
-        whileHover={{ scale: 1.02, transition: { duration: 0.25 } }}
-      >
-        <img
-          src={imageSrc}
-          alt={name}
-          className="w-full aspect-square object-cover"
-        />
+      <div className="hero-portrait relative overflow-hidden rounded-[1.5rem] bg-theme-card/30 transition-transform duration-200 ease-out hover:scale-[1.02]">
+        <img src={imageSrc} alt={name} className="w-full aspect-square object-cover" />
         <span className="hero-portrait-glow" aria-hidden />
         <div className="absolute top-3 left-3">
           <StatusPill label="online" tone="live" />
@@ -57,9 +41,9 @@ export default function HeroAside({ imageSrc, name }: HeroAsideProps) {
           <span className="px-2 py-0.5 rounded-md bg-black/55">whoami</span>
           <span className="px-2 py-0.5 rounded-md bg-black/55">v4.0</span>
         </div>
-      </motion.div>
+      </div>
 
       <TerminalIntro lines={TERMINAL_SCRIPT} />
-    </motion.aside>
+    </aside>
   )
 }

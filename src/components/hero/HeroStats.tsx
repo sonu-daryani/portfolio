@@ -1,7 +1,5 @@
 'use client'
 
-import { motion } from 'framer-motion'
-
 const STATS = [
   { value: '4+', label: 'Years building' },
   { value: '15+', label: 'Production apps' },
@@ -11,13 +9,7 @@ const STATS = [
 
 export default function HeroStats() {
   return (
-    <motion.div
-      className="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full max-w-xl"
-      variants={{
-        hidden: { opacity: 0, y: 16 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.1 } },
-      }}
-    >
+    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full max-w-xl opacity-0 motion-safe:animate-fade-in-up motion-reduce:opacity-100 motion-reduce:animate-none delay-[420ms]">
       {STATS.map((s) => (
         <div
           key={s.label}
@@ -27,6 +19,6 @@ export default function HeroStats() {
           <p className="text-[11px] sm:text-xs text-theme-muted font-mono mt-1">{s.label}</p>
         </div>
       ))}
-    </motion.div>
+    </div>
   )
 }

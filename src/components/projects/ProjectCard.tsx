@@ -1,6 +1,5 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import type { Profile } from '../../types/profile'
 import Card from '../ui/Card'
 import { Icon } from '../ui/Icon'
@@ -16,12 +15,12 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project, index, isAI, onSelect }: ProjectCardProps) {
   return (
-    <motion.div
-      layout
-      initial={{ opacity: 0, y: 14 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 8 }}
-      transition={{ duration: 0.35, delay: index * 0.03 }}
+    <div
+      className="opacity-0 motion-safe:animate-fade-in-up motion-reduce:opacity-100 motion-reduce:animate-none"
+      style={{
+        animationDelay: `${index * 45}ms`,
+        animationFillMode: 'forwards',
+      }}
     >
       <Card
         as="button"
@@ -62,7 +61,7 @@ export default function ProjectCard({ project, index, isAI, onSelect }: ProjectC
           </span>
         </div>
       </Card>
-    </motion.div>
+    </div>
   )
 }
 
