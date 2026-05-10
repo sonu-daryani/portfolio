@@ -189,14 +189,14 @@ export const profile: Profile = {
     {
       name: 'hls-react-player (npm)',
       description:
-        'Open-source React video player on npm — MP4, HLS, and DASH with StreamFlix-style controls, keyboard shortcuts, and customizable UI.',
+        'Open-source React video player on npm — live demo, installation guide, and docs on Netlify; MP4, HLS, and DASH with StreamFlix-style controls.',
       detailedDescription:
-        'Published npm package hls-react-player: a reusable StreamPlayer component for MP4, HLS (m3u8), and DASH (MPD), with auto-detection via hls.js and dash.js, custom controls, resolution/audio/subtitle selection for HLS, embed mode, optional WebVTT scrub thumbnails, and TypeScript types. Ships bundled styles and powers the StreamFlix demo. Repository: github.com/sonu-daryani/react-stream-player.',
+        'Published npm package hls-react-player: a reusable StreamPlayer component for MP4, HLS (m3u8), and DASH (MPD), with auto-detection via hls.js and dash.js, custom controls, resolution/audio/subtitle selection for HLS, embed mode, optional WebVTT scrub thumbnails, and TypeScript types. Interactive demo and installation guide: quiet-maamoul-ca11c6.netlify.app (#player). Registry: npmjs.com/package/hls-react-player. Source: github.com/sonu-daryani/react-stream-player. Powers the StreamFlix demo.',
       tech: ['React', 'TypeScript', 'hls.js', 'DASH', 'npm'],
-      link: 'https://www.npmjs.com/package/hls-react-player',
+      link: 'https://quiet-maamoul-ca11c6.netlify.app/#player',
       date: 'May 2026',
       previewImage:
-        'https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fhls-react-player?w=1200',
+        'https://s.wordpress.com/mshots/v1/https%3A%2F%2Fquiet-maamoul-ca11c6.netlify.app%2F?w=1200',
     },
     {
       name: 'TrackCryptoPro',
