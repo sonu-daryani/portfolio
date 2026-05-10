@@ -24,18 +24,21 @@ const fragmentShader = /* glsl */ `
   }
 `
 
-export default function SkyDay() {
+interface SkyDayProps {
+  reducedMotion?: boolean
+}
+
+export default function SkyDay({ reducedMotion = false }: SkyDayProps) {
   const materialRef = useRef<THREE.ShaderMaterial>(null)
 
   useFrame((state) => {
-    if (materialRef.current?.uniforms?.uOffset) {
-      materialRef.current.uniforms.uOffset.value = state.clock.elapsedTime * 0.02
-    }
+    if (reducedMotion || !materialRef.current?.uniforms?.uOffset) return
+    materialRef.current.uniforms.uOffset.value = state.clock.elapsedTime * 0.02
   })
 
   return (
     <mesh scale={[-1, 1, 1]} position={[0, 0, 0]}>
-      <sphereGeometry args={[50, 32, 32]} />
+      <sphereGeometry args={[50, 24, 24]} />
       <shaderMaterial
         ref={materialRef}
         vertexShader={vertexShader}

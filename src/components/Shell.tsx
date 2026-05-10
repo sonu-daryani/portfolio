@@ -1,7 +1,8 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { AdaptiveDpr, PerformanceMonitor } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { usePathname, useRouter } from 'next/navigation'
 import { useTheme } from '../context/ThemeContext'
@@ -27,12 +28,23 @@ export const SECTIONS: SectionItem[] = [
 export default function Shell({ children }: { children: React.ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const [canvasFrameloop, setCanvasFrameloop] = useState<'always' | 'never'>('always')
+  const prefersReducedMotion = useReducedMotion()
   const { theme } = useTheme()
   const pathname = usePathname()
   const router = useRouter()
 
   useEffect(() => {
     setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    const onVisibility = () => {
+      setCanvasFrameloop(document.visibilityState === 'hidden' ? 'never' : 'always')
+    }
+    document.addEventListener('visibilitychange', onVisibility)
+    onVisibility()
+    return () => document.removeEventListener('visibilitychange', onVisibility)
   }, [])
 
   useEffect(() => {
@@ -50,10 +62,18 @@ export default function Shell({ children }: { children: React.ReactNode }) {
           <Canvas
             key={theme}
             camera={{ position: [0, 0, 6], fov: 50 }}
-            gl={{ alpha: false, antialias: true }}
-            dpr={[1, 2]}
+            frameloop={canvasFrameloop}
+            gl={{
+              alpha: false,
+              antialias: true,
+              powerPreference: 'high-performance',
+            }}
+            dpr={[1, 1.5]}
           >
-            <Scene3D theme={theme} />
+            <PerformanceMonitor>
+              <AdaptiveDpr />
+              <Scene3D theme={theme} reducedMotion={Boolean(prefersReducedMotion)} />
+            </PerformanceMonitor>
           </Canvas>
         ) : null}
       </div>

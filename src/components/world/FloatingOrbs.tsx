@@ -11,12 +11,14 @@ const ORBS = [
 
 interface FloatingOrbsProps {
   isDay: boolean
+  reducedMotion?: boolean
 }
 
-export default function FloatingOrbs({ isDay }: FloatingOrbsProps) {
+export default function FloatingOrbs({ isDay, reducedMotion = false }: FloatingOrbsProps) {
   const refs = useRef<(THREE.Mesh | null)[]>([])
 
   useFrame((state) => {
+    if (reducedMotion) return
     refs.current.forEach((mesh, i) => {
       if (!mesh) return
       const t = state.clock.elapsedTime * (ORBS[i].speed + 0.1)
@@ -34,7 +36,7 @@ export default function FloatingOrbs({ isDay }: FloatingOrbsProps) {
             position={orb.position}
             scale={orb.scale * 0.8}
           >
-            <sphereGeometry args={[1, 32, 32]} />
+            <sphereGeometry args={[1, 20, 20]} />
             <meshBasicMaterial
               color="#e2e8f0"
               transparent
@@ -56,7 +58,7 @@ export default function FloatingOrbs({ isDay }: FloatingOrbsProps) {
           position={orb.position}
           scale={orb.scale}
         >
-          <sphereGeometry args={[1, 32, 32]} />
+          <sphereGeometry args={[1, 20, 20]} />
           <meshBasicMaterial
             color="#7c3aed"
             transparent

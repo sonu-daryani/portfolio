@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useRef } from 'react'
+import { useMemo, useRef, useCallback, useEffect } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import type { Profile } from '../types/profile'
 import { useTypewriter } from '../hooks/useTypewriter'
@@ -30,23 +30,41 @@ export default function Hero({ profile }: HeroProps) {
 
   // Subtle 3D tilt that follows the cursor over the hero card.
   const cardRef = useRef<HTMLDivElement>(null)
+  const tiltRaf = useRef<number | null>(null)
+  const pendingMove = useRef<{ cx: number; cy: number } | null>(null)
   const x = useMotionValue(0.5)
   const y = useMotionValue(0.5)
   const spring = { type: 'spring' as const, stiffness: 300, damping: 30 }
   const rotateX = useSpring(useTransform(y, [0, 1], [6, -6]), spring)
   const rotateY = useSpring(useTransform(x, [0, 1], [-6, 6]), spring)
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const applyPointer = useCallback(() => {
+    tiltRaf.current = null
+    const move = pendingMove.current
+    pendingMove.current = null
     const rect = cardRef.current?.getBoundingClientRect()
-    if (!rect) return
-    x.set((e.clientX - rect.left) / rect.width)
-    y.set((e.clientY - rect.top) / rect.height)
+    if (!move || !rect) return
+    x.set((move.cx - rect.left) / rect.width)
+    y.set((move.cy - rect.top) / rect.height)
+  }, [x, y])
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    pendingMove.current = { cx: e.clientX, cy: e.clientY }
+    if (tiltRaf.current != null) return
+    tiltRaf.current = window.requestAnimationFrame(applyPointer)
   }
 
   const resetTilt = () => {
     x.set(0.5)
     y.set(0.5)
   }
+
+  useEffect(
+    () => () => {
+      if (tiltRaf.current != null) window.cancelAnimationFrame(tiltRaf.current)
+    },
+    [],
+  )
 
   return (
     <section className="relative min-h-[calc(100vh-8rem)] flex flex-col justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24 py-10 sm:py-14 md:py-16 lg:py-20">

@@ -2,14 +2,15 @@ import { useRef, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 
-const COUNT = 800
+const COUNT = 480
 const RADIUS = 12
 
 interface ParticleFieldProps {
   isDay: boolean
+  reducedMotion?: boolean
 }
 
-export default function ParticleField({ isDay }: ParticleFieldProps) {
+export default function ParticleField({ isDay, reducedMotion = false }: ParticleFieldProps) {
   const pointsRef = useRef<THREE.Points>(null)
   const positions = useMemo(() => {
     const pos = new Float32Array(COUNT * 3)
@@ -25,10 +26,13 @@ export default function ParticleField({ isDay }: ParticleFieldProps) {
   }, [])
 
   useFrame((state) => {
-    if (pointsRef.current) {
-      pointsRef.current.rotation.y = state.clock.elapsedTime * 0.02
-    }
+    if (reducedMotion || !pointsRef.current) return
+    pointsRef.current.rotation.y = state.clock.elapsedTime * 0.02
   })
+
+  if (reducedMotion) {
+    return null
+  }
 
   if (isDay) {
     return (

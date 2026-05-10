@@ -13,9 +13,11 @@ import type { Theme } from '../context/ThemeContext'
 
 interface Scene3DProps {
   theme: Theme
+  /** Static scene + lighter meshes when OS/browser requests reduced motion */
+  reducedMotion?: boolean
 }
 
-export default function Scene3D({ theme }: Scene3DProps) {
+export default function Scene3D({ theme, reducedMotion = false }: Scene3DProps) {
   const groupRef = useRef<Group>(null)
   const { scene, gl } = useThree()
   const isDay = theme === 'light'
@@ -33,16 +35,15 @@ export default function Scene3D({ theme }: Scene3DProps) {
   }, [isDay, scene, gl])
 
   useFrame((state) => {
-    if (groupRef.current) {
-      groupRef.current.rotation.y = state.clock.elapsedTime * 0.02
-    }
+    if (reducedMotion || !groupRef.current) return
+    groupRef.current.rotation.y = state.clock.elapsedTime * 0.02
   })
 
   return (
     <>
       {isDay ? (
         <>
-          <SkyDay />
+          <SkyDay reducedMotion={reducedMotion} />
           <ambientLight intensity={0.95} />
           <directionalLight position={[10, 15, 10]} intensity={1.2} color="#ffffff" castShadow />
           <pointLight position={[-5, 5, 5]} intensity={0.3} color="#ffffff" />
@@ -57,12 +58,12 @@ export default function Scene3D({ theme }: Scene3DProps) {
       )}
 
       <group ref={groupRef}>
-        <DisplacementSphere isDay={isDay} />
-        <ParticleField isDay={isDay} />
-        <TorusRing isDay={isDay} />
+        <DisplacementSphere isDay={isDay} reducedMotion={reducedMotion} />
+        <ParticleField isDay={isDay} reducedMotion={reducedMotion} />
+        <TorusRing isDay={isDay} reducedMotion={reducedMotion} />
       </group>
 
-      <FloatingOrbs isDay={isDay} />
+      <FloatingOrbs isDay={isDay} reducedMotion={reducedMotion} />
     </>
   )
 }

@@ -46,24 +46,27 @@ const LIGHT_COLORS = { c1: '#f1f5f9', c2: '#ffffff' }
 
 interface DisplacementSphereProps {
   isDay: boolean
+  reducedMotion?: boolean
 }
 
-export default function DisplacementSphere({ isDay }: DisplacementSphereProps) {
+export default function DisplacementSphere({ isDay, reducedMotion = false }: DisplacementSphereProps) {
   const meshRef = useRef<Mesh>(null)
   const materialRef = useRef<ShaderMaterial & { uniforms: ShaderUniforms }>(null)
   const colors = isDay ? LIGHT_COLORS : DARK_COLORS
 
   useFrame((state) => {
     if (!meshRef.current) return
-    meshRef.current.rotation.y = state.clock.elapsedTime * 0.08
-    if (materialRef.current?.uniforms?.uTime) {
-      materialRef.current.uniforms.uTime.value = state.clock.elapsedTime
+    if (!reducedMotion) {
+      meshRef.current.rotation.y = state.clock.elapsedTime * 0.08
+      if (materialRef.current?.uniforms?.uTime) {
+        materialRef.current.uniforms.uTime.value = state.clock.elapsedTime
+      }
     }
   })
 
   return (
     <mesh ref={meshRef} scale={2.2}>
-      <icosahedronGeometry args={[2.5, 4]} />
+      <icosahedronGeometry args={[2.5, 3]} />
       <shaderMaterial
         ref={materialRef}
         vertexShader={vertexShader}
