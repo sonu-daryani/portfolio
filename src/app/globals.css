@@ -601,6 +601,14 @@ html.light .ai-panel {
   border-color: rgba(0, 0, 0, 0.08);
   box-shadow: 0 12px 32px -16px rgba(15, 23, 42, 0.25);
 }
+/* Dark: solid surface so the canvas gradient does not show through (Tailwind /98 was translucent). */
+html.dark .ai-panel {
+  background-color: #09090b;
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 12px 32px -16px rgba(0, 0, 0, 0.65),
+    0 0 0 1px rgba(0, 0, 0, 0.35);
+}
 .ai-suggestion {
   transition: border-color 0.15s ease, background 0.15s ease;
 }

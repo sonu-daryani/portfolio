@@ -32,7 +32,7 @@ export default function ChatPanel() {
     <div
       role="dialog"
       aria-label="AI assistant"
-      className="ai-panel fixed bottom-24 right-3 sm:right-5 z-40 w-[min(420px,94vw)] max-h-[min(640px,80vh)] flex flex-col rounded-2xl border border-theme-border bg-theme-strong/98 dark:bg-zinc-950/98 shadow-2xl overflow-hidden opacity-0 motion-safe:animate-panel-in motion-reduce:opacity-100 motion-reduce:animate-none"
+      className="ai-panel fixed bottom-24 right-3 sm:right-5 z-40 w-[min(420px,94vw)] max-h-[min(640px,80vh)] min-h-0 flex flex-col rounded-2xl border border-theme-border bg-theme-strong dark:bg-zinc-950 shadow-2xl overflow-hidden opacity-0 motion-safe:animate-panel-in motion-reduce:opacity-100 motion-reduce:animate-none"
     >
       <Header onClose={closePanel} />
 
