@@ -27,24 +27,14 @@ export default function StatusPill({ label, tone = 'live', className }: StatusPi
         className,
       )}
     >
-      <span className="relative flex h-2 w-2">
-        <span
-          className={cn(
-            'absolute inline-flex h-full w-full rounded-full opacity-75 animate-ping',
-            tone === 'live' && 'bg-emerald-400',
-            tone === 'info' && 'bg-accent',
-            tone === 'muted' && 'bg-theme-muted',
-          )}
-        />
-        <span
-          className={cn(
-            'relative inline-flex h-2 w-2 rounded-full',
-            tone === 'live' && 'bg-emerald-400',
-            tone === 'info' && 'bg-accent',
-            tone === 'muted' && 'bg-theme-muted',
-          )}
-        />
-      </span>
+      <span
+        className={cn(
+          'inline-flex h-2 w-2 shrink-0 rounded-full',
+          tone === 'live' && 'bg-emerald-400',
+          tone === 'info' && 'bg-accent',
+          tone === 'muted' && 'bg-theme-muted',
+        )}
+      />
       {label}
     </motion.span>
   )
