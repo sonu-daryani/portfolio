@@ -174,6 +174,18 @@ export const profile: Profile = {
       previewImage:
         'https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwearo-ecommerce.vercel.app%2F?w=1200',
     },
+    {
+      name: 'StreamFlix',
+      description:
+        'Next.js streaming-style demo — browse titles, responsive catalog UI, and a polished viewing experience inspired by modern OTT layouts.',
+      detailedDescription:
+        'StreamFlix is a portfolio streaming platform built with Next.js: catalog browsing, responsive grids and detail surfaces, and playback-oriented layouts inspired by mainstream OTT apps. Deployed on Vercel for fast global delivery; focused on performance, accessible navigation, and a cohesive dark UI suitable for video-heavy experiences.',
+      tech: ['Next.js', 'TypeScript', 'React', 'Tailwind CSS'],
+      link: 'https://streamflix-nu-nine.vercel.app/',
+      date: 'May 2026',
+      previewImage:
+        'https://s.wordpress.com/mshots/v1/https%3A%2F%2Fstreamflix-nu-nine.vercel.app%2F?w=1200',
+    },
   ],
   achievements: [
     'Rockstar Rookie Award – Crownstack',
