@@ -15,7 +15,7 @@ A multi-page, AI-driven portfolio built with **Next.js (App Router)**, **TypeScr
 ```bash
 npm install
 cp .env.example .env.local
-# fill in OLLAMA_API_KEY in .env.local
+# fill in AI_API_URL, AI_API_KEY and AI_MODEL in .env.local
 npm run dev
 ```
 
@@ -24,13 +24,16 @@ Open [http://localhost:3000](http://localhost:3000).
 ## Environment
 
 ### AI chatbot
-| Variable             | Default                   | Notes                                       |
-| -------------------- | ------------------------- | ------------------------------------------- |
-| `OLLAMA_API_KEY`     | _(required for chatbot)_  | Get one at https://ollama.com/account/keys  |
-| `OLLAMA_HOST`        | `https://ollama.com`      | Override if you proxy or self-host          |
-| `OLLAMA_AGENT_MODEL` | `gpt-oss:120b`            | Any Ollama-Cloud-compatible model id        |
+| Variable        | Default              | Notes                                                                 |
+| --------------- | -------------------- | --------------------------------------------------------------------- |
+| `AI_API_URL`    | `https://ollama.com` | Base URL or full endpoint of any OpenAI-compatible API or Ollama      |
+| `AI_API_KEY`    | _(required)_         | API key for that provider (optional for localhost)                    |
+| `AI_MODEL`      | `gpt-oss:120b`       | Any model id the provider supports                                    |
+| `AI_API_FORMAT` | auto                 | `openai` or `ollama`; auto-detected from the URL                      |
 
-If `OLLAMA_API_KEY` is unset the site still runs; the chatbot just shows a friendly "offline" notice and points visitors at the contact form / email instead.
+Examples: `https://api.openai.com/v1`, `https://openrouter.ai/api/v1`, `https://api.groq.com/openai/v1`, `http://localhost:11434` (Ollama). The legacy `OLLAMA_HOST`, `OLLAMA_API_KEY` and `OLLAMA_AGENT_MODEL` variables still work.
+
+If no API key is set the site still runs; the chatbot just shows a friendly "offline" notice and points visitors at the contact form / email instead.
 
 ### Contact form (SMTP)
 | Variable      | Default          | Notes                                            |
