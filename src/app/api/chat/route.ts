@@ -7,6 +7,7 @@ import {
   rateLimit,
   rateLimitedResponse,
 } from '../../../lib/apiGuard'
+import { buildRequestBody, getLlmConfig, parseStreamLine } from '../../../lib/llmConfig'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -19,9 +20,6 @@ interface ChatMessage {
 interface ChatBody {
   messages: ChatMessage[]
 }
-
-const OLLAMA_BASE = process.env.OLLAMA_HOST || 'https://ollama.com'
-const OLLAMA_MODEL = process.env.OLLAMA_AGENT_MODEL || 'gpt-oss:120b'
 
 const MAX_HISTORY = 12
 const MAX_CONTENT_CHARS = 4000
@@ -57,8 +55,9 @@ export async function POST(req: NextRequest) {
     return rateLimitedResponse()
   }
 
-  const apiKey = process.env.OLLAMA_API_KEY
-  if (!apiKey) {
+  const cfg = getLlmConfig()
+  const isLocal = /localhost|127\.0\.0\.1|\[::1\]/.test(cfg.endpoint)
+  if (!cfg.apiKey && !isLocal) {
     return jsonError(
       503,
       'The AI assistant is currently offline. Please use the contact form below or email sonudaryani135@gmail.com.',
@@ -94,21 +93,13 @@ export async function POST(req: NextRequest) {
 
   const systemPrompt = buildSystemPrompt(profile)
 
-  const upstream = await fetch(`${OLLAMA_BASE}/api/chat`, {
+  const headers: Record<string, string> = { 'content-type': 'application/json' }
+  if (cfg.apiKey) headers.authorization = `Bearer ${cfg.apiKey}`
+
+  const upstream = await fetch(cfg.endpoint, {
     method: 'POST',
-    headers: {
-      'content-type': 'application/json',
-      authorization: `Bearer ${apiKey}`,
-    },
-    body: JSON.stringify({
-      model: OLLAMA_MODEL,
-      stream: true,
-      messages: [{ role: 'system', content: systemPrompt }, ...cleanMessages],
-      options: {
-        temperature: 0.5,
-        num_predict: 512,
-      },
-    }),
+    headers,
+    body: buildRequestBody(cfg, [{ role: 'system', content: systemPrompt }, ...cleanMessages]),
   }).catch(
     (err) =>
       new Response(JSON.stringify({ error: `Upstream fetch failed: ${err.message}` }), {
@@ -136,7 +127,7 @@ export async function POST(req: NextRequest) {
   })
 }
 
-/** Convert Ollama's NDJSON stream into our minimal {delta, done, error} stream. */
+/** Convert an Ollama NDJSON or OpenAI SSE stream into our minimal {delta, done, error} stream. */
 function relayUpstream(upstreamBody: ReadableStream<Uint8Array>): ReadableStream<Uint8Array> {
   const decoder = new TextDecoder()
   const encoder = new TextEncoder()
@@ -160,22 +151,14 @@ function relayUpstream(upstreamBody: ReadableStream<Uint8Array>): ReadableStream
             const line = buffer.slice(0, nl).trim()
             buffer = buffer.slice(nl + 1)
             if (!line) continue
-            try {
-              const parsed = JSON.parse(line) as {
-                message?: { content?: string }
-                done?: boolean
-                error?: string
-              }
-              if (parsed.error) {
-                send({ error: parsed.error })
-                continue
-              }
-              const delta = parsed.message?.content
-              if (typeof delta === 'string' && delta.length > 0) send({ delta })
-              if (parsed.done) send({ done: true })
-            } catch {
-              // ignore malformed line
+            const parsed = parseStreamLine(line)
+            if (!parsed) continue
+            if (parsed.error) {
+              send({ error: parsed.error })
+              continue
             }
+            if (parsed.delta) send({ delta: parsed.delta })
+            if (parsed.done) send({ done: true })
           }
         }
       } catch (err) {
